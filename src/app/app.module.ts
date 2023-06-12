@@ -7,12 +7,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule  } from '@angular/common/http';
 
 import { MatTabsModule } from '@angular/material/tabs';
-import { DataListComponent } from './data-list/data-list.component'
+import { DataListComponent } from './data-list/data-list.component';
+import { DeleteItemComponent } from './delete-item/delete-item.component';
+import { EditItemComponent } from './edit-item/edit-item.component'
 
 @NgModule({
   declarations: [
     AppComponent,
-    DataListComponent
+    DataListComponent,
+    DeleteItemComponent,
+    EditItemComponent
   ],
   imports: [
     BrowserModule,

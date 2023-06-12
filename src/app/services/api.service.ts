@@ -24,4 +24,14 @@ export class ApiService {
         console.log(data);
       })
     }
+    getBudgets() {
+      return this.http.get(this.API_URL + 'Budgets').subscribe((data:any) => {
+        console.log(data);
+      })
+    }
+    getBills() {
+      return this.http.get(this.API_URL + 'Bills').subscribe((data:any) => {
+        console.log(data);
+      })
+    }
 }
