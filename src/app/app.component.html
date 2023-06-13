@@ -1,6 +1,8 @@
 <mat-tab-group>
   <mat-tab *ngFor="let tab of allTabs" label="{{ tab.name }}">
-    <app-data-list [optionName]="tab.name"></app-data-list>
+    <app-bills-list *ngIf="tab.name === 'Facturas'">Facturas</app-bills-list>
+    <app-budgets-list *ngIf="tab.name === 'Presupuestos'">Presupuestos</app-budgets-list>
+    <app-clients-list *ngIf="tab.name === 'Clientes'">Clientes</app-clients-list>
   </mat-tab>
 </mat-tab-group>
 <ng-content></ng-content>

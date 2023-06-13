@@ -20,18 +20,12 @@ export class ApiService {
     };
 
     getClients() {
-      return this.http.get(this.API_URL + 'Clients').subscribe((data:any) => {
-        console.log(data);
-      })
+      return this.http.get(this.API_URL + 'Clients');
     }
     getBudgets() {
-      return this.http.get(this.API_URL + 'Budgets').subscribe((data:any) => {
-        console.log(data);
-      })
+      return this.http.get(this.API_URL + 'Budgets/Data');
     }
     getBills() {
-      return this.http.get(this.API_URL + 'Bills').subscribe((data:any) => {
-        console.log(data);
-      })
+      return this.http.get(this.API_URL + 'Bills');
     }
 }

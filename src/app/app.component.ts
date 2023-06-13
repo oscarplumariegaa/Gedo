@@ -20,9 +20,9 @@ export class AppComponent {
 
   ngOnInit() {
     this.allTabs = [
-      { name: 'Facturas', template: this.Facturas },
-      { name: 'Presupuestos', template: this.Presupuestos },
-      { name: 'Clientes', template: this.Clientes }
+      { name: 'Facturas'},
+      { name: 'Presupuestos'},
+      { name: 'Clientes'}
     ];
   }
 }

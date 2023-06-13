@@ -7,23 +7,29 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule  } from '@angular/common/http';
 
 import { MatTabsModule } from '@angular/material/tabs';
-import { DataListComponent } from './data-list/data-list.component';
+import {MatTableModule} from '@angular/material/table';
 import { DeleteItemComponent } from './delete-item/delete-item.component';
-import { EditItemComponent } from './edit-item/edit-item.component'
+import { EditItemComponent } from './edit-item/edit-item.component';
+import { ClientsListComponent } from './clients-list/clients-list.component';
+import { BillsListComponent } from './bills-list/bills-list.component';
+import { BudgetsListComponent } from './budgets-list/budgets-list.component'
 
 @NgModule({
   declarations: [
     AppComponent,
-    DataListComponent,
     DeleteItemComponent,
-    EditItemComponent
+    EditItemComponent,
+    ClientsListComponent,
+    BillsListComponent,
+    BudgetsListComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    MatTabsModule
+    MatTabsModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
