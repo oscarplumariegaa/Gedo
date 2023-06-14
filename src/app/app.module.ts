@@ -7,12 +7,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule  } from '@angular/common/http';
 
 import { MatTabsModule } from '@angular/material/tabs';
-import {MatTableModule} from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
 import { DeleteItemComponent } from './delete-item/delete-item.component';
 import { EditItemComponent } from './edit-item/edit-item.component';
 import { ClientsListComponent } from './clients-list/clients-list.component';
 import { BillsListComponent } from './bills-list/bills-list.component';
-import { BudgetsListComponent } from './budgets-list/budgets-list.component'
+import { BudgetsListComponent } from './budgets-list/budgets-list.component';
+import { LoginComponent } from './login/login.component'
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { BudgetsListComponent } from './budgets-list/budgets-list.component'
     EditItemComponent,
     ClientsListComponent,
     BillsListComponent,
-    BudgetsListComponent
+    BudgetsListComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,8 @@ import { BudgetsListComponent } from './budgets-list/budgets-list.component'
     BrowserAnimationsModule,
     HttpClientModule,
     MatTabsModule,
-    MatTableModule
+    MatTableModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
