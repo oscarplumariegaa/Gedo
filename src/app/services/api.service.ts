@@ -28,4 +28,10 @@ export class ApiService {
     getBills() {
       return this.http.get(this.API_URL + 'Bills');
     }
+    getClientById(id: number){
+      return this.http.get(this.API_URL + 'Clients/' + id);
+    }
+    postClient(){
+      
+    }
 }

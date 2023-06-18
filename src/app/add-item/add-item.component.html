@@ -1,0 +1,36 @@
+<form [formGroup]="addClientForm" class="dialog-form">
+    <div mat-dialog-title>Añadir Cliente</div>
+    <mat-dialog-content>
+        <p>
+            <mat-form-field>
+                <mat-label>Nombre Cliente</mat-label>
+                <input formControlName="NameClient" matInput
+                  placeholder="Nombre Cliente" />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Dirección</mat-label>
+                <input formControlName="Address" matInput
+                  placeholder="Dirección" />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>CIF</mat-label>
+                <input formControlName="CIF" matInput
+                  placeholder="CIF" />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Teléfono</mat-label>
+                <input formControlName="PhoneNumber" matInput
+                  placeholder="Teléfono" />
+            </mat-form-field>
+        </p>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <button mat-raised-button color="primary" (click)="onAddCus()" type="submit"
+        [disabled]="addClientForm.invalid">
+        Añadir
+      </button>
+      <button mat-raised-button (click)="openDialog()" color="warn">
+        Cancelar
+      </button>
+    </mat-dialog-actions>
+</form>

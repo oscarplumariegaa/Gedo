@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DeleteItemComponent } from '../delete-item/delete-item.component';
+import { EditItemComponent } from '../edit-item/edit-item.component';
+import { AddItemComponent } from '../add-item/add-item.component';
 
 @Component({
   selector: 'app-clients-list',
@@ -20,14 +22,27 @@ export class ClientsListComponent {
     })
   }
 
-  openDialog(client:any){
-    console.log(client);
-  }
-  openDialogDelete(id:number){
-    const dialogRef = this.dialog.open(DeleteItemComponent, {
-      width: '1340px', disableClose: true, data: {
-        idClient: id
-      }
-    });
+  openDialog(action:number, id:number){
+    switch(action){
+      case 0:
+        this.dialog.open(AddItemComponent, {
+          width: '1340px', disableClose: true, data: {
+            idClient: id
+          }
+        });
+        break;
+      case 1:
+        this.dialog.open(DeleteItemComponent, {
+          width: '1340px', disableClose: true, data: {
+            idClient: id
+          }
+        });
+        break;
+      case 2: 
+        this.dialog.open(AddItemComponent, {
+          width: '1340px', disableClose: true
+        });
+        break;
+    }
   }
 }
