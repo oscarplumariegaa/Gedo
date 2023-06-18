@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DeleteItemComponent } from '../delete-item/delete-item.component';
-import { EditItemComponent } from '../edit-item/edit-item.component';
 import { AddItemComponent } from '../add-item/add-item.component';
 
 @Component({

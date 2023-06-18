@@ -17,7 +17,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
 import { DeleteItemComponent } from './delete-item/delete-item.component';
-import { EditItemComponent } from './edit-item/edit-item.component';
 import { ClientsListComponent } from './clients-list/clients-list.component';
 import { BillsListComponent } from './bills-list/bills-list.component';
 import { BudgetsListComponent } from './budgets-list/budgets-list.component';
@@ -28,7 +27,6 @@ import { AddItemComponent } from './add-item/add-item.component'
   declarations: [
     AppComponent,
     DeleteItemComponent,
-    EditItemComponent,
     ClientsListComponent,
     BillsListComponent,
     BudgetsListComponent,
