@@ -31,7 +31,10 @@ export class ApiService {
     getClientById(id: number){
       return this.http.get(this.API_URL + 'Clients/' + id);
     }
-    postClient(){
-      
+    postClient(arrClient: any){
+      console.log(arrClient);
+      const headers = { 'content-type': 'application/json' }
+      const body = JSON.stringify(arrClient);
+      return this.http.post<any>(this.API_URL + 'Clients', body, { 'headers': headers });
     }
 }

@@ -36,6 +36,7 @@ export class AddItemComponent {
       this.service.getClientById(this.id.idClient).subscribe((client:any) => {
         this.addClientForm.controls['NameClient'].setValue(client.nameClient);
         this.addClientForm.controls['Address'].setValue(client.address);
+        this.addClientForm.controls['Email'].setValue(client.email);
         this.addClientForm.controls['CIF'].setValue(client.cif);
         this.addClientForm.controls['PhoneNumber'].setValue(client.phoneNumber);
       })
@@ -65,6 +66,8 @@ export class AddItemComponent {
     }
   }
   onAddCus(){
-
+    this.service.postClient(this.addClientForm.value).subscribe(data => {
+      console.log(data);
+    })
   }
 }
