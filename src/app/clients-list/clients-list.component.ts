@@ -21,7 +21,7 @@ export class ClientsListComponent {
     })
   }
 
-  openDialog(action:number, id:number){
+  openDialog(action:number, id:number, name:string){
     switch(action){
       case 0:
         this.dialog.open(AddItemComponent, {
@@ -33,7 +33,8 @@ export class ClientsListComponent {
       case 1:
         this.dialog.open(DeleteItemComponent, {
           width: '1340px', disableClose: true, data: {
-            idClient: id
+            idClient: id,
+            nameClient: name
           }
         });
         break;

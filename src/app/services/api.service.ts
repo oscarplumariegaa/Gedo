@@ -37,4 +37,7 @@ export class ApiService {
       const body = JSON.stringify(arrClient);
       return this.http.post<any>(this.API_URL + 'Clients', body, { 'headers': headers });
     }
+    deleteClient(id:number){
+      return this.http.delete<any>(this.API_URL + 'Clients/' + id);
+    }
 }

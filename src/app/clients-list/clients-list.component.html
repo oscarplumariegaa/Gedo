@@ -1,4 +1,4 @@
-<button mat-raised-button (click)="openDialog(2,0)" color="primary">Añadir Cliente</button>
+<button mat-raised-button (click)="openDialog(2,0,'')" color="primary">Añadir Cliente</button>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container matColumnDef="NameClient">
       <th mat-header-cell *matHeaderCellDef> Nombre Cliente </th>
@@ -23,8 +23,8 @@
       <ng-container matColumnDef="Actions">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Acciones </th>
         <td mat-cell *matCellDef="let client">
-          <button mat-raised-button (click)="openDialog(0,client.idClient)" color="primary">Detalles</button>
-          <button mat-raised-button (click)="openDialog(1,client.idClient)" color="primary">Eliminar</button>
+          <button mat-raised-button (click)="openDialog(0,client.idClient,'')" color="primary">Detalles</button>
+          <button mat-raised-button (click)="openDialog(1,client.idClient,client.nameClient)" color="primary">Eliminar</button>
         </td>
       </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
