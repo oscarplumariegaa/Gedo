@@ -31,13 +31,23 @@ export class ApiService {
     getClientById(id: number){
       return this.http.get(this.API_URL + 'Clients/' + id);
     }
+    getBudgetById(id: number){
+      return this.http.get(this.API_URL + 'Budgets/' + id);
+    }
     postClient(arrClient: any){
-      console.log(arrClient);
       const headers = { 'content-type': 'application/json' }
       const body = JSON.stringify(arrClient);
       return this.http.post<any>(this.API_URL + 'Clients', body, { 'headers': headers });
     }
+    postBudget(arrBudget: any){
+      const headers = { 'content-type': 'application/json' }
+      const body = JSON.stringify(arrBudget);
+      return this.http.post<any>(this.API_URL + 'Budgets', body, { 'headers': headers });
+    }
     deleteClient(id:number){
       return this.http.delete<any>(this.API_URL + 'Clients/' + id);
+    }
+    deleteBudget(id:number){
+      return this.http.delete<any>(this.API_URL + 'Budgets/' + id);
     }
 }

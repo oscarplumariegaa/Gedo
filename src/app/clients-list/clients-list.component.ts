@@ -34,7 +34,8 @@ export class ClientsListComponent {
         this.dialog.open(DeleteItemComponent, {
           width: '1340px', disableClose: true, data: {
             idClient: id,
-            nameClient: name
+            nameClient: name,
+            action: 'client'
           }
         });
         break;

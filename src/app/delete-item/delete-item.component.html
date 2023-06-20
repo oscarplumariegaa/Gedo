@@ -1,1 +1,24 @@
-<p>¿Desea eliminar el cliente {{ NameClient }}</p>
+<div *ngIf="data.idClient">
+    <div mat-dialog-title>Eliminar Cliente</div>
+    <mat-dialog-content>
+      <p>
+        <mat-label>¿Desea eliminar el cliente {{ data.nameClient }}?</mat-label>
+      </p>
+    <div class="btn-sec">
+      <button mat-raised-button type="submit" color="primary" class="Update-btn" (click)="confirmDelete()">Eliminar</button>
+      <button mat-raised-button type="button" class="Discard-btn" (click)="openDialog()">Cancelar</button>
+    </div>
+    </mat-dialog-content>
+</div>
+<div *ngIf="data.idBudget">
+    <div mat-dialog-title>Eliminar Presupuesto</div>
+    <mat-dialog-content>
+      <p>
+        <mat-label>¿Desea eliminar el presupuesto {{ data.nameBudget }}?</mat-label>
+      </p>
+    <div class="btn-sec">
+      <button mat-raised-button type="submit" color="primary" class="Update-btn" (click)="confirmDelete()">Eliminar</button>
+      <button mat-raised-button type="button" class="Discard-btn" (click)="openDialog()">Cancelar</button>
+    </div>
+    </mat-dialog-content>
+</div>

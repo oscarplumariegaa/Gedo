@@ -16,29 +16,47 @@ export class AddItemComponent {
     private router: Router,
     private route: ActivatedRoute,
     private service: ApiService,
-    @Inject(MAT_DIALOG_DATA) public id: any
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
   public addClientForm!: FormGroup;
+  public addBudgetForm!: FormGroup;
   public breakpoint!: number;
   wasFormChanged = false;
 
   ngOnInit() {
+    this.addBudgetForm = this.fb.group({
+      NameBudget: '',
+      IdClient: '',
+      IdUser: 2,
+      Import: '',
+      ImportIVA: ''
+    })
+
     this.addClientForm = this.fb.group({
       NameClient: '',
       Address: '',
       Email: '',
       CIF: '',
-      PhoneNumber: '',
+      PhoneNumber: ''
     })
 
-    if(this.id){
-      this.service.getClientById(this.id.idClient).subscribe((client:any) => {
+    if(this.data.idClient){
+      this.service.getClientById(this.data.idClient).subscribe((client:any) => {
         this.addClientForm.controls['NameClient'].setValue(client.nameClient);
         this.addClientForm.controls['Address'].setValue(client.address);
         this.addClientForm.controls['Email'].setValue(client.email);
         this.addClientForm.controls['CIF'].setValue(client.cif);
         this.addClientForm.controls['PhoneNumber'].setValue(client.phoneNumber);
+      })
+    }
+    if(this.data.idBudget){
+      this.service.getBudgetById(this.data.idBudget).subscribe((client:any) => {
+        this.addBudgetForm.controls['NameBudget'].setValue(client.nameBudget);
+        this.addBudgetForm.controls['IdClient'].setValue(client.idClient);
+        this.addBudgetForm.controls['IdUser'].setValue(client.idUser);
+        this.addBudgetForm.controls['Import'].setValue(client.import);
+        this.addBudgetForm.controls['ImportIVA'].setValue(client.importIVA);
       })
     }
   }
@@ -66,8 +84,15 @@ export class AddItemComponent {
     }
   }
   onAddCus(){
-    this.service.postClient(this.addClientForm.value).subscribe(data => {
-      console.log(data);
-    })
+    if(this.data.action === 'client'){
+      this.service.postClient(this.addClientForm.value).subscribe(data => {
+        console.log(data);
+      })
+    }
+    if(this.data.action === 'budget'){
+      this.service.postBudget(this.addBudgetForm.value).subscribe(data => {
+        console.log(data);
+      })
+    }
   }
 }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DeleteItemComponent } from '../delete-item/delete-item.component';
+import { AddItemComponent } from '../add-item/add-item.component';
 
 @Component({
   selector: 'app-budgets-list',
@@ -9,7 +10,7 @@ import { DeleteItemComponent } from '../delete-item/delete-item.component';
   styleUrls: ['./budgets-list.component.css']
 })
 export class BudgetsListComponent {
-  displayedColumns: string[] = ['Client', 'Import', 'ImportIVA', 'Actions'];
+  displayedColumns: string[] = ['NameBudget','Client', 'Import', 'ImportIVA', 'Actions'];
   dataSource:any = [];
 
   constructor(public dialog: MatDialog, private service: ApiService){}
@@ -19,14 +20,31 @@ export class BudgetsListComponent {
     })
   }
 
-  openDialog(budget:any){
-    console.log(budget);
-  }
-  openDialogDelete(id:number){
-    const dialogRef = this.dialog.open(DeleteItemComponent, {
-      width: '1340px', disableClose: true, data: {
-        idBudget: id
-      }
-    });
+  openDialog(action:number, id:number, name:string){
+    switch(action){
+      case 0:
+        this.dialog.open(AddItemComponent, {
+          width: '1340px', disableClose: true, data: {
+            idBudget: id
+          }
+        });
+        break;
+      case 1:
+        this.dialog.open(DeleteItemComponent, {
+          width: '1340px', disableClose: true, data: {
+            idBudget: id,
+            nameBudget: name,
+            action: 'budget'
+          }
+        });
+        break;
+      case 2: 
+        this.dialog.open(AddItemComponent, {
+          width: '1340px', disableClose: true, data: {
+            action: 'budget'
+          }
+        });
+        break;
+    }
   }
 }
