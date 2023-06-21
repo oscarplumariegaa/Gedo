@@ -23,8 +23,10 @@ export class AddItemComponent {
   public addBudgetForm!: FormGroup;
   public breakpoint!: number;
   wasFormChanged = false;
+  clients!:any;
 
   ngOnInit() {
+    console.log(this.data.action);
     this.addBudgetForm = this.fb.group({
       NameBudget: '',
       IdClient: '',
@@ -37,28 +39,34 @@ export class AddItemComponent {
       NameClient: '',
       Address: '',
       Email: '',
+      IdUser: 2,
       CIF: '',
       PhoneNumber: ''
     })
 
-    if(this.data.idClient){
-      this.service.getClientById(this.data.idClient).subscribe((client:any) => {
-        this.addClientForm.controls['NameClient'].setValue(client.nameClient);
-        this.addClientForm.controls['Address'].setValue(client.address);
-        this.addClientForm.controls['Email'].setValue(client.email);
-        this.addClientForm.controls['CIF'].setValue(client.cif);
-        this.addClientForm.controls['PhoneNumber'].setValue(client.phoneNumber);
+    if(this.data.client){
+      this.addClientForm = this.fb.group({
+        NameClient: this.data.client.nameClient ? this.data.client.nameClient : '',
+        Address: this.data.client.address ? this.data.client.address : '',
+        Email: this.data.client.email ? this.data.client.email : '',
+        IdUser: 2,
+        CIF: this.data.client.cif ? this.data.client.cif : '',
+        PhoneNumber: this.data.client.phoneNumber ? this.data.client.phoneNumber : ''
       })
     }
-    if(this.data.idBudget){
-      this.service.getBudgetById(this.data.idBudget).subscribe((client:any) => {
-        this.addBudgetForm.controls['NameBudget'].setValue(client.nameBudget);
-        this.addBudgetForm.controls['IdClient'].setValue(client.idClient);
-        this.addBudgetForm.controls['IdUser'].setValue(client.idUser);
-        this.addBudgetForm.controls['Import'].setValue(client.import);
-        this.addBudgetForm.controls['ImportIVA'].setValue(client.importIVA);
+    if(this.data.budget){
+      this.addBudgetForm = this.fb.group({
+        NameBudget: this.data.budget.nameBudget ? this.data.budget.nameBudget : '',
+        NameClient: this.data.budget.nameClient ? this.data.budget.nameClient : '',
+        IdClient: this.data.budget.idClient ? this.data.budget.idClient : '',
+        IdUser: 2,
+        Import: this.data.budget.import ? this.data.budget.import : '',
+        ImportIVA: this.data.budget.importIVA ? this.data.budget.importIVA : ''
       })
     }
+    this.service.getClientsByUser(2).subscribe(clients=> {
+      this.clients = clients;
+    })
   }
 
   public onResize(event: any): void {
@@ -86,12 +94,12 @@ export class AddItemComponent {
   onAddCus(){
     if(this.data.action === 'client'){
       this.service.postClient(this.addClientForm.value).subscribe(data => {
-        console.log(data);
+        window.location.reload();
       })
     }
     if(this.data.action === 'budget'){
       this.service.postBudget(this.addBudgetForm.value).subscribe(data => {
-        console.log(data);
+        window.location.reload();
       })
     }
   }

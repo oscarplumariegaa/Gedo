@@ -1,74 +1,65 @@
-<form *ngIf="data.action === 'client' || data.idClient" [formGroup]="addClientForm" class="dialog-form">
-    <div mat-dialog-title>Añadir Cliente</div>
-    <mat-dialog-content>
-        <p>
-            <mat-form-field>
-                <mat-label>Nombre Cliente</mat-label>
-                <input formControlName="NameClient" matInput
-                  placeholder="Nombre Cliente" />
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label>Dirección</mat-label>
-                <input formControlName="Address" matInput
-                  placeholder="Dirección" />
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label>Email</mat-label>
-                <input formControlName="Email" matInput
-                  placeholder="Email" />
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label>CIF</mat-label>
-                <input formControlName="CIF" matInput
-                  placeholder="CIF" />
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label>Teléfono</mat-label>
-                <input formControlName="PhoneNumber" matInput
-                  placeholder="Teléfono" />
-            </mat-form-field>
-        </p>
-    </mat-dialog-content>
-    <mat-dialog-actions>
-      <button mat-raised-button color="primary" (click)="onAddCus()" type="submit"
-        [disabled]="addClientForm.invalid">
-        Añadir
-      </button>
-      <button mat-raised-button (click)="openDialog()" color="warn">
-        Cancelar
-      </button>
-    </mat-dialog-actions>
-</form>
-
-<form *ngIf="data.action === 'budget' || data.idBudget" [formGroup]="addBudgetForm" class="dialog-form">
-  <div mat-dialog-title>Añadir Presupuesto</div>
+<form *ngIf="data.action === 'client' || data.client" [formGroup]="addClientForm" class="dialog-form">
+  <div mat-dialog-title>Añadir Cliente</div>
   <mat-dialog-content>
-      <p>
-          <mat-form-field>
-              <mat-label>Nombre Presupuesto</mat-label>
-              <input formControlName="NameBudget" matInput
-                placeholder="Nombre Presupuesto" />
-          </mat-form-field>
-          <mat-form-field>
-              <mat-label>Cliente</mat-label>
-              <input formControlName="IdClient" matInput
-                placeholder="Cliente" />
-          </mat-form-field>
-          <mat-form-field>
-              <mat-label>Importe</mat-label>
-              <input formControlName="Import" matInput
-                placeholder="Importe" />
-          </mat-form-field>
-          <mat-form-field>
-              <mat-label>Importe IVA</mat-label>
-              <input formControlName="ImportIVA" matInput
-                placeholder="Importe IVA" />
-          </mat-form-field>
-      </p>
+    <p>
+      <mat-form-field>
+        <mat-label>Nombre Cliente</mat-label>
+        <input formControlName="NameClient" matInput placeholder="Nombre Cliente" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Dirección</mat-label>
+        <input formControlName="Address" matInput placeholder="Dirección" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input formControlName="Email" matInput placeholder="Email" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>CIF</mat-label>
+        <input formControlName="CIF" matInput placeholder="CIF" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Teléfono</mat-label>
+        <input formControlName="PhoneNumber" matInput placeholder="Teléfono" />
+      </mat-form-field>
+    </p>
   </mat-dialog-content>
   <mat-dialog-actions>
-    <button mat-raised-button color="primary" (click)="onAddCus()" type="submit"
-      [disabled]="addBudgetForm.invalid">
+    <button mat-raised-button color="primary" (click)="onAddCus()" type="submit" [disabled]="addClientForm.invalid">
+      Añadir
+    </button>
+    <button mat-raised-button (click)="openDialog()" color="warn">
+      Cancelar
+    </button>
+  </mat-dialog-actions>
+</form>
+
+<form *ngIf="data.action === 'budget' || data.budget" [formGroup]="addBudgetForm" class="dialog-form">
+  <div mat-dialog-title>Añadir Presupuesto</div>
+  <mat-dialog-content>
+    <p>
+      <mat-form-field>
+        <mat-label>Nombre Presupuesto</mat-label>
+        <input formControlName="NameBudget" matInput placeholder="Nombre Presupuesto" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Cliente</mat-label>
+        <mat-select formControlName="IdClient" placeholder="Cliente">
+          <mat-option *ngFor="let c of clients" [value]="c.idClient">{{ c.nameClient }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Importe</mat-label>
+        <input formControlName="Import" matInput placeholder="Importe" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Importe IVA</mat-label>
+        <input formControlName="ImportIVA" matInput placeholder="Importe IVA" />
+      </mat-form-field>
+    </p>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button color="primary" (click)="onAddCus()" type="submit" [disabled]="addBudgetForm.invalid">
       Añadir
     </button>
     <button mat-raised-button (click)="openDialog()" color="warn">

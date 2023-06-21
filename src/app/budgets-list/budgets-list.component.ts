@@ -20,12 +20,12 @@ export class BudgetsListComponent {
     })
   }
 
-  openDialog(action:number, id:number, name:string){
+  openDialog(action:number, data:any, id:number, name:string){
     switch(action){
       case 0:
         this.dialog.open(AddItemComponent, {
           width: '1340px', disableClose: true, data: {
-            idBudget: id
+            budget: data
           }
         });
         break;

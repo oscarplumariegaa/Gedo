@@ -21,12 +21,12 @@ export class ClientsListComponent {
     })
   }
 
-  openDialog(action:number, id:number, name:string){
+  openDialog(action:number, data:any, id:number, name:string){
     switch(action){
       case 0:
         this.dialog.open(AddItemComponent, {
           width: '1340px', disableClose: true, data: {
-            idClient: id
+            client: data
           }
         });
         break;
@@ -41,7 +41,9 @@ export class ClientsListComponent {
         break;
       case 2: 
         this.dialog.open(AddItemComponent, {
-          width: '1340px', disableClose: true
+          width: '1340px', disableClose: true, data: {
+            action: 'client'
+          }
         });
         break;
     }

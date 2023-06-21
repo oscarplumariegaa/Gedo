@@ -50,4 +50,7 @@ export class ApiService {
     deleteBudget(id:number){
       return this.http.delete<any>(this.API_URL + 'Budgets/' + id);
     }
+    getClientsByUser(id: number){
+      return this.http.get(this.API_URL + 'Clients/ClientsByUser/' + id);
+    }
 }
