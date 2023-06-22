@@ -10,18 +10,18 @@ import { AddItemComponent } from '../add-item/add-item.component';
   styleUrls: ['./budgets-list.component.css']
 })
 export class BudgetsListComponent {
-  displayedColumns: string[] = ['NameBudget','Client', 'Import', 'ImportIVA', 'Actions'];
-  dataSource:any = [];
+  displayedColumns: string[] = ['NameBudget', 'Client', 'Import', 'ImportIVA', 'Actions'];
+  dataSource: any = [];
 
-  constructor(public dialog: MatDialog, private service: ApiService){}
+  constructor(public dialog: MatDialog, private service: ApiService) { }
   ngOnInit() {
     this.service.getBudgets().subscribe(budgets => {
       this.dataSource = budgets;
     })
   }
 
-  openDialog(action:number, data:any, id:number, name:string){
-    switch(action){
+  openDialog(action: number, data: any, id: number, name: string) {
+    switch (action) {
       case 0:
         this.dialog.open(AddItemComponent, {
           width: '1340px', disableClose: true, data: {
@@ -38,10 +38,18 @@ export class BudgetsListComponent {
           }
         });
         break;
-      case 2: 
+      case 2:
         this.dialog.open(AddItemComponent, {
           width: '1340px', disableClose: true, data: {
             action: 'budget'
+          }
+        });
+        break;
+      case 3:
+        this.dialog.open(AddItemComponent, {
+          width: '1340px', disableClose: true, data: {
+            action: 'createBill',
+            budget: data
           }
         });
         break;

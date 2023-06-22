@@ -34,7 +34,19 @@
   </mat-dialog-actions>
 </form>
 
-<div *ngIf="data.action === 'budget' || data.budget">
+<div *ngIf="data.action === 'createBill'">
+  <div mat-dialog-title>Generar factura</div>
+  <mat-dialog-content>
+    <p>
+      <mat-label>¿Desea generar la factura a partir del presupuesto?</mat-label>
+    </p>
+    <div class="btn-sec">
+      <button mat-raised-button type="submit" color="primary" class="Update-btn" (click)="openDialog()">Generar</button>
+      <button mat-raised-button type="button" class="Discard-btn" (click)="openDialog()">Cancelar</button>
+    </div>
+  </mat-dialog-content>
+</div>
+<div *ngIf="data.action !== 'createBill'">
   <form [formGroup]="addBudgetForm" class="dialog-form">
     <div mat-dialog-title>Añadir Presupuesto</div>
     <mat-dialog-content>
@@ -63,14 +75,14 @@
           <tr>
             <td>
               <mat-form-field>
-                <input matInput id="newNameField" [(ngModel)]="newConcept.nameField" [ngModelOptions]="{standalone: true}" name="newConceptNameField"
-                  placeholder="Concepto">
+                <input matInput id="newNameField" [(ngModel)]="newConcept.nameField"
+                  [ngModelOptions]="{standalone: true}" name="newConceptNameField" placeholder="Concepto">
               </mat-form-field>
             </td>
             <td>
               <mat-form-field>
-                <input matInput id="newValue" [(ngModel)]="newConcept.value" [ngModelOptions]="{standalone: true}" name="newConceptValue"
-                  placeholder="Valor">
+                <input matInput id="newValue" [(ngModel)]="newConcept.value" [ngModelOptions]="{standalone: true}"
+                  name="newConceptValue" placeholder="Valor">
               </mat-form-field>
             </td>
             <td>
@@ -81,12 +93,14 @@
             <tr *ngFor="let c of conceptData; let i = index">
               <td>
                 <mat-form-field>
-                  <input matInput [(ngModel)]="c.nameField" [ngModelOptions]="{standalone: true}" name="{{c.nameField}}" placeholder="City">
+                  <input matInput [(ngModel)]="c.nameField" [ngModelOptions]="{standalone: true}" name="{{c.nameField}}"
+                    placeholder="City">
                 </mat-form-field>
               </td>
               <td>
                 <mat-form-field>
-                  <input matInput [(ngModel)]="c.value" [ngModelOptions]="{standalone: true}" name="{{c.value}}" placeholder="State">
+                  <input matInput [(ngModel)]="c.value" [ngModelOptions]="{standalone: true}" name="{{c.value}}"
+                    placeholder="State">
                 </mat-form-field>
               </td>
               <td>
@@ -98,12 +112,14 @@
             <tr *ngFor="let field of fieldArray; let i = index">
               <td>
                 <mat-form-field>
-                  <input matInput [(ngModel)]="field.nameField" [ngModelOptions]="{standalone: true}" name="{{field.nameField}}" placeholder="City">
+                  <input matInput [(ngModel)]="field.nameField" [ngModelOptions]="{standalone: true}"
+                    name="{{field.nameField}}" placeholder="City">
                 </mat-form-field>
               </td>
               <td>
                 <mat-form-field>
-                  <input matInput [(ngModel)]="field.value" [ngModelOptions]="{standalone: true}" name="{{field.value}}" placeholder="State">
+                  <input matInput [(ngModel)]="field.value" [ngModelOptions]="{standalone: true}" name="{{field.value}}"
+                    placeholder="State">
                 </mat-form-field>
               </td>
               <td>

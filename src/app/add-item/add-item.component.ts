@@ -30,6 +30,7 @@ export class AddItemComponent {
   public conceptData:any;
 
   ngOnInit() {
+    console.log(this.data);
     this.service.lastIdBudgetByUser(2).subscribe((id: any) => {
       this.lastBudgetId = id;
     })
