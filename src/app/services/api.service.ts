@@ -44,6 +44,11 @@ export class ApiService {
       const body = JSON.stringify(arrBudget);
       return this.http.post<any>(this.API_URL + 'Budgets', body, { 'headers': headers });
     }
+    postConcepts(arrConcepts: any){
+      const headers = { 'content-type': 'application/json' }
+      const body = JSON.stringify(arrConcepts);
+      return this.http.post<any>(this.API_URL + 'Concepts', body, { 'headers': headers });
+    }
     deleteClient(id:number){
       return this.http.delete<any>(this.API_URL + 'Clients/' + id);
     }
@@ -52,5 +57,11 @@ export class ApiService {
     }
     getClientsByUser(id: number){
       return this.http.get(this.API_URL + 'Clients/ClientsByUser/' + id);
+    }
+    lastIdBudgetByUser(id:number){
+      return this.http.get(this.API_URL + 'Budgets/LastBudget/'+id);
+    }
+    getBudgetConcepts(id:number){
+      return this.http.get(this.API_URL + 'Concepts/BudgetConcepts/'+id);
     }
 }

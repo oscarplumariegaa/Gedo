@@ -34,36 +34,93 @@
   </mat-dialog-actions>
 </form>
 
-<form *ngIf="data.action === 'budget' || data.budget" [formGroup]="addBudgetForm" class="dialog-form">
-  <div mat-dialog-title>Añadir Presupuesto</div>
-  <mat-dialog-content>
-    <p>
-      <mat-form-field>
-        <mat-label>Nombre Presupuesto</mat-label>
-        <input formControlName="NameBudget" matInput placeholder="Nombre Presupuesto" />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Cliente</mat-label>
-        <mat-select formControlName="IdClient" placeholder="Cliente">
-          <mat-option *ngFor="let c of clients" [value]="c.idClient">{{ c.nameClient }}</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Importe</mat-label>
-        <input formControlName="Import" matInput placeholder="Importe" />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Importe IVA</mat-label>
-        <input formControlName="ImportIVA" matInput placeholder="Importe IVA" />
-      </mat-form-field>
-    </p>
-  </mat-dialog-content>
-  <mat-dialog-actions>
-    <button mat-raised-button color="primary" (click)="onAddCus()" type="submit" [disabled]="addBudgetForm.invalid">
-      Añadir
-    </button>
-    <button mat-raised-button (click)="openDialog()" color="warn">
-      Cancelar
-    </button>
-  </mat-dialog-actions>
-</form>
+<div *ngIf="data.action === 'budget' || data.budget">
+  <form [formGroup]="addBudgetForm" class="dialog-form">
+    <div mat-dialog-title>Añadir Presupuesto</div>
+    <mat-dialog-content>
+      <p>
+        <mat-form-field>
+          <mat-label>Nombre Presupuesto</mat-label>
+          <input formControlName="NameBudget" matInput placeholder="Nombre Presupuesto" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Cliente</mat-label>
+          <mat-select formControlName="IdClient" placeholder="Cliente">
+            <mat-option *ngFor="let c of clients" [value]="c.idClient">{{ c.nameClient }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Importe</mat-label>
+          <input formControlName="Import" matInput placeholder="Importe" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Importe IVA</mat-label>
+          <input formControlName="ImportIVA" matInput placeholder="Importe IVA" />
+        </mat-form-field>
+      </p>
+      <table class="table table-striped table-bordered">
+        <tbody>
+          <tr>
+            <td>
+              <mat-form-field>
+                <input matInput id="newNameField" [(ngModel)]="newConcept.nameField" [ngModelOptions]="{standalone: true}" name="newConceptNameField"
+                  placeholder="Concepto">
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field>
+                <input matInput id="newValue" [(ngModel)]="newConcept.value" [ngModelOptions]="{standalone: true}" name="newConceptValue"
+                  placeholder="Valor">
+              </mat-form-field>
+            </td>
+            <td>
+              <button class="btn btn-default" type="button" (click)="addFieldValue()">Add</button>
+            </td>
+          </tr>
+          <ng-container *ngIf="data.budget">
+            <tr *ngFor="let c of conceptData; let i = index">
+              <td>
+                <mat-form-field>
+                  <input matInput [(ngModel)]="c.nameField" [ngModelOptions]="{standalone: true}" name="{{c.nameField}}" placeholder="City">
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field>
+                  <input matInput [(ngModel)]="c.value" [ngModelOptions]="{standalone: true}" name="{{c.value}}" placeholder="State">
+                </mat-form-field>
+              </td>
+              <td>
+                <button class="btn btn-default" type="button" (click)="deleteFieldValue(i)">Delete</button>
+              </td>
+            </tr>
+          </ng-container>
+          <ng-container>
+            <tr *ngFor="let field of fieldArray; let i = index">
+              <td>
+                <mat-form-field>
+                  <input matInput [(ngModel)]="field.nameField" [ngModelOptions]="{standalone: true}" name="{{field.nameField}}" placeholder="City">
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field>
+                  <input matInput [(ngModel)]="field.value" [ngModelOptions]="{standalone: true}" name="{{field.value}}" placeholder="State">
+                </mat-form-field>
+              </td>
+              <td>
+                <button class="btn btn-default" type="button" (click)="deleteFieldValue(i)">Delete</button>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <button mat-raised-button color="primary" (click)="onAddCus()" type="submit" [disabled]="addBudgetForm.invalid">
+        Añadir
+      </button>
+      <button mat-raised-button (click)="openDialog()" color="warn">
+        Cancelar
+      </button>
+    </mat-dialog-actions>
+  </form>
+</div>

@@ -24,9 +24,15 @@ export class AddItemComponent {
   public breakpoint!: number;
   wasFormChanged = false;
   clients!:any;
+  public fieldArray: Array<any> = [];
+  public newConcept: any = {};
+  lastBudgetId!:number;
+  public conceptData:any;
 
   ngOnInit() {
-    console.log(this.data.action);
+    this.service.lastIdBudgetByUser(2).subscribe((id: any) => {
+      this.lastBudgetId = id;
+    })
     this.addBudgetForm = this.fb.group({
       NameBudget: '',
       IdClient: '',
@@ -34,7 +40,6 @@ export class AddItemComponent {
       Import: '',
       ImportIVA: ''
     })
-
     this.addClientForm = this.fb.group({
       NameClient: '',
       Address: '',
@@ -43,7 +48,6 @@ export class AddItemComponent {
       CIF: '',
       PhoneNumber: ''
     })
-
     if(this.data.client){
       this.addClientForm = this.fb.group({
         NameClient: this.data.client.nameClient ? this.data.client.nameClient : '',
@@ -55,6 +59,9 @@ export class AddItemComponent {
       })
     }
     if(this.data.budget){
+      this.service.getBudgetConcepts(this.data.budget.idBudget).subscribe(data => {
+        this.conceptData = data;
+      })
       this.addBudgetForm = this.fb.group({
         NameBudget: this.data.budget.nameBudget ? this.data.budget.nameBudget : '',
         NameClient: this.data.budget.nameClient ? this.data.budget.nameClient : '',
@@ -99,8 +106,24 @@ export class AddItemComponent {
     }
     if(this.data.action === 'budget'){
       this.service.postBudget(this.addBudgetForm.value).subscribe(data => {
+        if(this.fieldArray.length > 0){
+          this.service.postConcepts(this.fieldArray).subscribe(data => {
+            window.location.reload();
+          })
+        }
         window.location.reload();
       })
     }
+  }
+  addFieldValue() {
+    console.log(this.newConcept);
+    this.newConcept['IdBudget'] = this.lastBudgetId;
+    this.fieldArray.push(this.newConcept);
+    console.log(this.fieldArray);
+    this.newConcept = {};
+  }
+
+  deleteFieldValue(index:number) {
+    this.fieldArray.splice(index, 1);
   }
 }

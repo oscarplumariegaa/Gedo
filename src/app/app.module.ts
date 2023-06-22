@@ -15,7 +15,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatOptionModule } from '@angular/material/core';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { MatListModule } from '@angular/material/list';
 
 import { DeleteItemComponent } from './delete-item/delete-item.component';
 import { ClientsListComponent } from './clients-list/clients-list.component';
@@ -23,7 +25,6 @@ import { BillsListComponent } from './bills-list/bills-list.component';
 import { BudgetsListComponent } from './budgets-list/budgets-list.component';
 import { LoginComponent } from './login/login.component';
 import { AddItemComponent } from './add-item/add-item.component';
-import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -42,17 +43,16 @@ import { MatSelectModule } from '@angular/material/select';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatTabsModule,
-    MatTableModule,
+    MatButtonModule,
     MatDialogModule,
     MatIconModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatFormFieldModule,
     MatInputModule,
-    MatOptionModule,
-    MatSelectModule
-
+    MatListModule,
+    MatSelectModule,
+    MatTableModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatNativeDateModule
   ],
   providers: [],
   bootstrap: [AppComponent]
