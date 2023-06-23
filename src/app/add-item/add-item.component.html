@@ -41,14 +41,15 @@
       <mat-label>¿Desea generar la factura a partir del presupuesto?</mat-label>
     </p>
     <div class="btn-sec">
-      <button mat-raised-button type="submit" color="primary" class="Update-btn" (click)="openDialog()">Generar</button>
+      <button mat-raised-button type="submit" color="primary" class="Update-btn" (click)="onAddCus()">Generar</button>
       <button mat-raised-button type="button" class="Discard-btn" (click)="openDialog()">Cancelar</button>
     </div>
   </mat-dialog-content>
 </div>
 <div *ngIf="data.action !== 'createBill'">
   <form [formGroup]="addBudgetForm" class="dialog-form">
-    <div mat-dialog-title>Añadir Presupuesto</div>
+    <div *ngIf="data.action === 'budget'" mat-dialog-title>Añadir Presupuesto</div>
+    <div *ngIf="data.budget.idBudget" mat-dialog-title>Editar Presupuesto</div>
     <mat-dialog-content>
       <p>
         <mat-form-field>
@@ -131,8 +132,11 @@
       </table>
     </mat-dialog-content>
     <mat-dialog-actions>
-      <button mat-raised-button color="primary" (click)="onAddCus()" type="submit" [disabled]="addBudgetForm.invalid">
+      <button *ngIf="data.action === 'budget'" mat-raised-button color="primary" (click)="onAddCus()" type="submit" [disabled]="addBudgetForm.invalid">
         Añadir
+      </button>
+      <button *ngIf="data.budget.idBudget" mat-raised-button color="primary" (click)="onAddCus()" type="submit" [disabled]="addBudgetForm.invalid">
+        Editar
       </button>
       <button mat-raised-button (click)="openDialog()" color="warn">
         Cancelar

@@ -23,16 +23,20 @@ export class AddItemComponent {
   public addBudgetForm!: FormGroup;
   public breakpoint!: number;
   wasFormChanged = false;
-  clients!:any;
+  clients!: any;
   public fieldArray: Array<any> = [];
   public newConcept: any = {};
-  lastBudgetId!:number;
-  public conceptData:any;
+  lastBudgetId!: number;
+  lastBillId!: number;
+  public conceptData: any;
 
   ngOnInit() {
-    console.log(this.data);
+    this.newConcept, this.fieldArray = [];
     this.service.lastIdBudgetByUser(2).subscribe((id: any) => {
       this.lastBudgetId = id;
+    })
+    this.service.lastIdBillByUser(2).subscribe((id: any) => {
+      this.lastBillId = id;
     })
     this.addBudgetForm = this.fb.group({
       NameBudget: '',
@@ -49,7 +53,7 @@ export class AddItemComponent {
       CIF: '',
       PhoneNumber: ''
     })
-    if(this.data.client){
+    if (this.data.client) {
       this.addClientForm = this.fb.group({
         NameClient: this.data.client.nameClient ? this.data.client.nameClient : '',
         Address: this.data.client.address ? this.data.client.address : '',
@@ -59,9 +63,10 @@ export class AddItemComponent {
         PhoneNumber: this.data.client.phoneNumber ? this.data.client.phoneNumber : ''
       })
     }
-    if(this.data.budget){
+    if (this.data.budget) {
       this.service.getBudgetConcepts(this.data.budget.idBudget).subscribe(data => {
         this.conceptData = data;
+        console.log(data);
       })
       this.addBudgetForm = this.fb.group({
         NameBudget: this.data.budget.nameBudget ? this.data.budget.nameBudget : '',
@@ -72,7 +77,7 @@ export class AddItemComponent {
         ImportIVA: this.data.budget.importIVA ? this.data.budget.importIVA : ''
       })
     }
-    this.service.getClientsByUser(2).subscribe(clients=> {
+    this.service.getClientsByUser(2).subscribe(clients => {
       this.clients = clients;
     })
   }
@@ -99,32 +104,59 @@ export class AddItemComponent {
       this.dialog.closeAll();
     }
   }
-  onAddCus(){
-    if(this.data.action === 'client'){
+  onAddCus() {
+    console.log(this.data.action);
+    if (this.data.action === 'createBill') {
+      let arrBill =
+      {
+        "idUser": 2,
+        "idClient": this.data.budget.idClient,
+        "idBudget": this.data.budget.idBudget
+      };
+      this.service.postBill(arrBill).subscribe(data => {
+        this.conceptsFunction(this.fieldArray, this.conceptData);
+      })
+    }
+    if (this.data.action === 'client') {
       this.service.postClient(this.addClientForm.value).subscribe(data => {
         window.location.reload();
       })
     }
-    if(this.data.action === 'budget'){
+    if (this.data.action === 'budget') {
       this.service.postBudget(this.addBudgetForm.value).subscribe(data => {
-        if(this.fieldArray.length > 0){
-          this.service.postConcepts(this.fieldArray).subscribe(data => {
-            window.location.reload();
-          })
-        }
+        this.conceptsFunction(this.fieldArray, 0);
         window.location.reload();
+      })
+    }
+    if(this.data.budget){
+      this.addBudgetForm.removeControl('IdBudget');
+      this.service.editBudget(this.data.budget.idBudget, this.addBudgetForm.value).subscribe(data => {
+        this.conceptsFunction(this.fieldArray, this.conceptData);
       })
     }
   }
   addFieldValue() {
-    console.log(this.newConcept);
-    this.newConcept['IdBudget'] = this.lastBudgetId;
+    this.newConcept['IdBudget'] = this.data.budget.idBudget;
     this.fieldArray.push(this.newConcept);
-    console.log(this.fieldArray);
     this.newConcept = {};
   }
 
-  deleteFieldValue(index:number) {
+  deleteFieldValue(index: number) {
     this.fieldArray.splice(index, 1);
+  }
+
+  conceptsFunction(newConcepts:any, toEditConcepts:any){
+    if (toEditConcepts.length > 0) {
+      for (let i = 0; i < toEditConcepts.length; i++) {
+        toEditConcepts[i]['idBill'] = this.lastBillId;
+      }
+      this.service.editConcepts(this.data.budget.idBudget, toEditConcepts).subscribe(data => { })
+    }
+    if (newConcepts.length > 0) {
+      for (let i = 0; i < newConcepts.length; i++) {
+        newConcepts[i]['idBill'] = this.lastBillId;
+      }
+      this.service.editConcepts(this.data.budget.idBudget, newConcepts).subscribe(data => { })
+    }
   }
 }

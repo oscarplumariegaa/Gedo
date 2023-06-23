@@ -39,6 +39,11 @@ export class ApiService {
       const body = JSON.stringify(arrClient);
       return this.http.post<any>(this.API_URL + 'Clients', body, { 'headers': headers });
     }
+    postBill(arrBill:any){
+      const headers = { 'content-type': 'application/json' }
+      const body = JSON.stringify(arrBill);
+      return this.http.post<any>(this.API_URL + 'Bills', body, { 'headers': headers });
+    }
     postBudget(arrBudget: any){
       const headers = { 'content-type': 'application/json' }
       const body = JSON.stringify(arrBudget);
@@ -48,6 +53,16 @@ export class ApiService {
       const headers = { 'content-type': 'application/json' }
       const body = JSON.stringify(arrConcepts);
       return this.http.post<any>(this.API_URL + 'Concepts', body, { 'headers': headers });
+    }
+    editConcepts(idBudget:number, arrConcepts: any){
+      const headers = { 'content-type': 'application/json' }
+      const body = JSON.stringify(arrConcepts);
+      return this.http.put<any>(this.API_URL + 'Concepts/'+idBudget, body, { 'headers': headers });
+    }
+    editBudget(idBudget:number, arrBudget: any){
+      const headers = { 'content-type': 'application/json' }
+      const body = JSON.stringify(arrBudget);
+      return this.http.put<any>(this.API_URL + 'Budgets/'+idBudget, body, { 'headers': headers });
     }
     deleteClient(id:number){
       return this.http.delete<any>(this.API_URL + 'Clients/' + id);
@@ -60,6 +75,9 @@ export class ApiService {
     }
     lastIdBudgetByUser(id:number){
       return this.http.get(this.API_URL + 'Budgets/LastBudget/'+id);
+    }
+    lastIdBillByUser(id:number){
+      return this.http.get(this.API_URL + 'Bills/LastBill/'+id);
     }
     getBudgetConcepts(id:number){
       return this.http.get(this.API_URL + 'Concepts/BudgetConcepts/'+id);
