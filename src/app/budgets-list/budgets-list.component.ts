@@ -25,6 +25,7 @@ export class BudgetsListComponent {
       case 0:
         this.dialog.open(AddItemComponent, {
           width: '1340px', disableClose: true, data: {
+            action: 'edit-budget',
             budget: data
           }
         });

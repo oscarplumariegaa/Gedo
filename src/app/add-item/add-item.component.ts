@@ -29,11 +29,17 @@ export class AddItemComponent {
   lastBudgetId!: number;
   lastBillId!: number;
   public conceptData: any;
+  public nextNameBudget!: string;
 
   ngOnInit() {
     this.newConcept, this.fieldArray = [];
-    this.service.lastIdBudgetByUser(2).subscribe((id: any) => {
-      this.lastBudgetId = id;
+    this.service.lastIdBudgetByUser(2).subscribe((data: any) => {
+      this.lastBudgetId = data.idBudget+1;
+      if(data === 0){
+        this.nextNameBudget = "0000";
+      }else{
+        this.padNumber(data.nameBudget);
+      }
     })
     this.service.lastIdBillByUser(2).subscribe((id: any) => {
       this.lastBillId = id;
@@ -66,7 +72,6 @@ export class AddItemComponent {
     if (this.data.budget) {
       this.service.getBudgetConcepts(this.data.budget.idBudget).subscribe(data => {
         this.conceptData = data;
-        console.log(data);
       })
       this.addBudgetForm = this.fb.group({
         NameBudget: this.data.budget.nameBudget ? this.data.budget.nameBudget : '',
@@ -92,6 +97,20 @@ export class AddItemComponent {
     for (const i in group.controls) {
       group.controls[i].markAsDirty();
     }
+  }
+
+  padNumber(num:any){
+    let nNumber: number = +num+1;
+    let n = nNumber.toString();
+    let size = n.toString().length;
+    if(size === 1){
+      n = "000"+nNumber;
+    }else if(size === 2){
+      n = "00"+nNumber;
+    }else if(size === 3){
+      n = "0"+nNumber;
+    }
+    this.nextNameBudget = n;
   }
 
   formChanged() {
@@ -146,11 +165,15 @@ export class AddItemComponent {
   }
 
   conceptsFunction(newConcepts:any, toEditConcepts:any){
-    if (toEditConcepts.length > 0) {
-      for (let i = 0; i < toEditConcepts.length; i++) {
-        toEditConcepts[i]['idBill'] = this.lastBillId;
+    console.log(newConcepts);
+    console.log(toEditConcepts);
+    if(toEditConcepts){
+      if (toEditConcepts.length > 0) {
+        for (let i = 0; i < toEditConcepts.length; i++) {
+          toEditConcepts[i]['idBill'] = this.lastBillId;
+        }
+        this.service.editConcepts(this.data.budget.idBudget, toEditConcepts).subscribe(data => { })
       }
-      this.service.editConcepts(this.data.budget.idBudget, toEditConcepts).subscribe(data => { })
     }
     if (newConcepts.length > 0) {
       for (let i = 0; i < newConcepts.length; i++) {

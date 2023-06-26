@@ -49,12 +49,13 @@
 <div *ngIf="data.action !== 'createBill'">
   <form [formGroup]="addBudgetForm" class="dialog-form">
     <div *ngIf="data.action === 'budget'" mat-dialog-title>Añadir Presupuesto</div>
-    <div *ngIf="data.budget.idBudget" mat-dialog-title>Editar Presupuesto</div>
+    <div *ngIf="data.action === 'edit-budget'" mat-dialog-title>Editar Presupuesto</div>
     <mat-dialog-content>
       <p>
         <mat-form-field>
           <mat-label>Nombre Presupuesto</mat-label>
-          <input formControlName="NameBudget" matInput placeholder="Nombre Presupuesto" />
+          <input *ngIf="data.action !== 'edit-budget'" formControlName="NameBudget" [ngModel]="nextNameBudget" [value]="nextNameBudget" matInput placeholder="Nombre Presupuesto" />
+          <input *ngIf="data.action === 'edit-budget'" formControlName="NameBudget" matInput placeholder="Nombre Presupuesto" />
         </mat-form-field>
         <mat-form-field>
           <mat-label>Cliente</mat-label>
@@ -135,7 +136,7 @@
       <button *ngIf="data.action === 'budget'" mat-raised-button color="primary" (click)="onAddCus()" type="submit" [disabled]="addBudgetForm.invalid">
         Añadir
       </button>
-      <button *ngIf="data.budget.idBudget" mat-raised-button color="primary" (click)="onAddCus()" type="submit" [disabled]="addBudgetForm.invalid">
+      <button *ngIf="data.action === 'edit-budget'" mat-raised-button color="primary" (click)="onAddCus()" type="submit" [disabled]="addBudgetForm.invalid">
         Editar
       </button>
       <button mat-raised-button (click)="openDialog()" color="warn">
