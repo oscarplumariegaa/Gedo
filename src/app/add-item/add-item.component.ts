@@ -34,10 +34,10 @@ export class AddItemComponent {
   ngOnInit() {
     this.newConcept, this.fieldArray = [];
     this.service.lastIdBudgetByUser(2).subscribe((data: any) => {
-      this.lastBudgetId = data.idBudget+1;
-      if(data === 0){
+      this.lastBudgetId = data.idBudget + 1;
+      if (data === 0) {
         this.nextNameBudget = "0000";
-      }else{
+      } else {
         this.padNumber(data.nameBudget);
       }
     })
@@ -99,16 +99,16 @@ export class AddItemComponent {
     }
   }
 
-  padNumber(num:any){
-    let nNumber: number = +num+1;
+  padNumber(num: any) {
+    let nNumber: number = +num + 1;
     let n = nNumber.toString();
     let size = n.toString().length;
-    if(size === 1){
-      n = "000"+nNumber;
-    }else if(size === 2){
-      n = "00"+nNumber;
-    }else if(size === 3){
-      n = "0"+nNumber;
+    if (size === 1) {
+      n = "000" + nNumber;
+    } else if (size === 2) {
+      n = "00" + nNumber;
+    } else if (size === 3) {
+      n = "0" + nNumber;
     }
     this.nextNameBudget = n;
   }
@@ -133,7 +133,7 @@ export class AddItemComponent {
         "idBudget": this.data.budget.idBudget
       };
       this.service.postBill(arrBill).subscribe(data => {
-        this.conceptsFunction(this.fieldArray, this.conceptData);
+        this.conceptsFunction('bill', this.fieldArray, this.conceptData);
       })
     }
     if (this.data.action === 'client') {
@@ -143,14 +143,14 @@ export class AddItemComponent {
     }
     if (this.data.action === 'budget') {
       this.service.postBudget(this.addBudgetForm.value).subscribe(data => {
-        this.conceptsFunction(this.fieldArray, 0);
+        this.conceptsFunction('budget', this.fieldArray, 0);
         window.location.reload();
       })
     }
-    if(this.data.budget){
+    if (this.data.budget) {
       this.addBudgetForm.removeControl('IdBudget');
       this.service.editBudget(this.data.budget.idBudget, this.addBudgetForm.value).subscribe(data => {
-        this.conceptsFunction(this.fieldArray, this.conceptData);
+        this.conceptsFunction('budget', this.fieldArray, this.conceptData);
       })
     }
   }
@@ -164,22 +164,16 @@ export class AddItemComponent {
     this.fieldArray.splice(index, 1);
   }
 
-  conceptsFunction(newConcepts:any, toEditConcepts:any){
+  conceptsFunction(action: string, newConcepts: any, toEditConcepts: any) {
     console.log(newConcepts);
     console.log(toEditConcepts);
-    if(toEditConcepts){
-      if (toEditConcepts.length > 0) {
-        for (let i = 0; i < toEditConcepts.length; i++) {
-          toEditConcepts[i]['idBill'] = this.lastBillId;
-        }
+    if (action === 'budget') {
+      if (toEditConcepts && toEditConcepts.length > 0) {
         this.service.editConcepts(this.data.budget.idBudget, toEditConcepts).subscribe(data => { })
       }
-    }
-    if (newConcepts.length > 0) {
-      for (let i = 0; i < newConcepts.length; i++) {
-        newConcepts[i]['idBill'] = this.lastBillId;
+      if (newConcepts && newConcepts.length > 0) {
+        this.service.editConcepts(this.data.budget.idBudget, newConcepts).subscribe(data => { })
       }
-      this.service.editConcepts(this.data.budget.idBudget, newConcepts).subscribe(data => { })
     }
   }
 }
