@@ -27,9 +27,9 @@ export class AddItemComponent {
   public fieldArray: Array<any> = [];
   public newConcept: any = {};
   lastBudgetId!: number;
-  lastBillId!: number;
   public conceptData: any;
   public nextNameBudget!: string;
+  public notEdit: boolean = true;
 
   ngOnInit() {
     this.newConcept, this.fieldArray = [];
@@ -41,15 +41,13 @@ export class AddItemComponent {
         this.padNumber(data.nameBudget);
       }
     })
-    this.service.lastIdBillByUser(2).subscribe((id: any) => {
-      this.lastBillId = id;
-    })
     this.addBudgetForm = this.fb.group({
       NameBudget: '',
       IdClient: '',
       IdUser: 2,
       Import: '',
-      ImportIVA: ''
+      ImportIVA: '',
+      IdBill: ''
     })
     this.addClientForm = this.fb.group({
       NameClient: '',
@@ -70,6 +68,9 @@ export class AddItemComponent {
       })
     }
     if (this.data.budget) {
+      if (this.data.budget.idBill > 0) {
+        this.notEdit = false;
+      }
       this.service.getBudgetConcepts(this.data.budget.idBudget).subscribe(data => {
         this.conceptData = data;
       })
@@ -79,7 +80,8 @@ export class AddItemComponent {
         IdClient: this.data.budget.idClient ? this.data.budget.idClient : '',
         IdUser: 2,
         Import: this.data.budget.import ? this.data.budget.import : '',
-        ImportIVA: this.data.budget.importIVA ? this.data.budget.importIVA : ''
+        ImportIVA: this.data.budget.importIVA ? this.data.budget.importIVA : '',
+        IdBill: this.data.budget.idBill ? this.data.budget.idBill : ''
       })
     }
     this.service.getClientsByUser(2).subscribe(clients => {
@@ -124,7 +126,6 @@ export class AddItemComponent {
     }
   }
   onAddCus() {
-    console.log(this.data.action);
     if (this.data.action === 'createBill') {
       let arrBill =
       {
@@ -165,8 +166,6 @@ export class AddItemComponent {
   }
 
   conceptsFunction(action: string, newConcepts: any, toEditConcepts: any) {
-    console.log(newConcepts);
-    console.log(toEditConcepts);
     if (action === 'budget') {
       if (toEditConcepts && toEditConcepts.length > 0) {
         this.service.editConcepts(this.data.budget.idBudget, toEditConcepts).subscribe(data => { })
@@ -174,6 +173,17 @@ export class AddItemComponent {
       if (newConcepts && newConcepts.length > 0) {
         this.service.editConcepts(this.data.budget.idBudget, newConcepts).subscribe(data => { })
       }
+    } else {
+      this.service.billByBudget(this.data.budget.idBudget).subscribe((id: any) => {
+        this.addBudgetForm.controls['IdBill'].setValue(id);
+        this.service.editBudget(this.data.budget.idBudget, this.addBudgetForm.value);
+        if (toEditConcepts && toEditConcepts.length > 0) {
+          for (let i = 0; i < toEditConcepts.length; i++) {
+            toEditConcepts[i]['idBill'] = id;
+          }
+          this.service.editConcepts(this.data.budget.idBudget, toEditConcepts).subscribe(data => { })
+        }
+      })
     }
   }
 }

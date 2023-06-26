@@ -136,7 +136,7 @@
       <button *ngIf="data.action === 'budget'" mat-raised-button color="primary" (click)="onAddCus()" type="submit" [disabled]="addBudgetForm.invalid">
         Añadir
       </button>
-      <button *ngIf="data.action === 'edit-budget'" mat-raised-button color="primary" (click)="onAddCus()" type="submit" [disabled]="addBudgetForm.invalid">
+      <button *ngIf="(data.action === 'edit-budget' && notEdit)" mat-raised-button color="primary" (click)="onAddCus()" type="submit" [disabled]="addBudgetForm.invalid">
         Editar
       </button>
       <button mat-raised-button (click)="openDialog()" color="warn">

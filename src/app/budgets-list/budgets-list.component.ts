@@ -56,4 +56,8 @@ export class BudgetsListComponent {
         break;
     }
   }
+
+  generatePDF(budget:any){
+
+  }
 }

@@ -82,4 +82,7 @@ export class ApiService {
     getBudgetConcepts(id:number){
       return this.http.get(this.API_URL + 'Concepts/BudgetConcepts/'+id);
     }
+    billByBudget(id:number){
+      return this.http.get(this.API_URL + 'Bills/BillBudget/'+id);
+    }
 }
