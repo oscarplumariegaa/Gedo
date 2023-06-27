@@ -15,7 +15,7 @@ export class BudgetsListComponent {
 
   constructor(public dialog: MatDialog, private service: ApiService) { }
   ngOnInit() {
-    this.service.getBudgets().subscribe(budgets => {
+    this.service.getBudgets(2).subscribe(budgets => {
       this.dataSource = budgets;
     })
   }

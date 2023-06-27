@@ -22,11 +22,11 @@ export class ApiService {
     getClients() {
       return this.http.get(this.API_URL + 'Clients');
     }
-    getBudgets() {
-      return this.http.get(this.API_URL + 'Budgets/Data');
+    getBudgets(id: number) {
+      return this.http.get(this.API_URL + 'Budgets/BudgetsByUser/' + id);
     }
-    getBills() {
-      return this.http.get(this.API_URL + 'Bills');
+    getBills(id: number) {
+      return this.http.get(this.API_URL + 'Bills/BillsByUser/' + id);
     }
     getClientById(id: number){
       return this.http.get(this.API_URL + 'Clients/' + id);
