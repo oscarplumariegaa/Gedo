@@ -46,7 +46,7 @@
     </div>
   </mat-dialog-content>
 </div>
-<div *ngIf="data.action !== 'createBill'">
+<div *ngIf="(data.action !== 'createBill' && data.action !== 'client')">
   <form [formGroup]="addBudgetForm" class="dialog-form">
     <div *ngIf="data.action === 'budget'" mat-dialog-title>Añadir Presupuesto</div>
     <div *ngIf="data.action === 'edit-budget'" mat-dialog-title>Editar Presupuesto</div>
