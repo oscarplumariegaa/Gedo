@@ -25,6 +25,7 @@ import { BillsListComponent } from './bills-list/bills-list.component';
 import { BudgetsListComponent } from './budgets-list/budgets-list.component';
 import { LoginComponent } from './login/login.component';
 import { AddItemComponent } from './add-item/add-item.component';
+import { TableDataGeneratePdfComponent } from './table-data-generate-pdf/table-data-generate-pdf.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { AddItemComponent } from './add-item/add-item.component';
     BillsListComponent,
     BudgetsListComponent,
     LoginComponent,
-    AddItemComponent
+    AddItemComponent,
+    TableDataGeneratePdfComponent
   ],
   imports: [
     BrowserModule,

@@ -150,13 +150,14 @@ export class AddItemComponent {
     }
     if (this.data.budget) {
       this.addBudgetForm.removeControl('IdBudget');
+      this.addBudgetForm.removeControl('IdBill');
       this.service.editBudget(this.data.budget.idBudget, this.addBudgetForm.value).subscribe(data => {
         this.conceptsFunction('budget', this.fieldArray, this.conceptData);
       })
     }
   }
   addFieldValue() {
-    this.newConcept['IdBudget'] = this.data.budget.idBudget;
+    this.newConcept['idBudget'] = this.data.budget.idBudget;
     this.fieldArray.push(this.newConcept);
     this.newConcept = {};
   }
@@ -167,10 +168,10 @@ export class AddItemComponent {
 
   conceptsFunction(action: string, newConcepts: any, toEditConcepts: any) {
     if (action === 'budget') {
-      if (toEditConcepts && toEditConcepts.length > 0) {
+      if (toEditConcepts.length > 0) {
         this.service.editConcepts(this.data.budget.idBudget, toEditConcepts).subscribe(data => { })
       }
-      if (newConcepts && newConcepts.length > 0) {
+      if (newConcepts.length > 0) {
         this.service.editConcepts(this.data.budget.idBudget, newConcepts).subscribe(data => { })
       }
     } else {

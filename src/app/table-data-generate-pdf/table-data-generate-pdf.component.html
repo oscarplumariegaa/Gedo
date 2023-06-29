@@ -1,0 +1,13 @@
+<div class="col-md-8" id="htmlData">
+    <p>Cliente: {{data.bill.idClient}}</p>
+    <table class="table table-bordered">
+        <tr class="table-primary">
+            <th>Concepto</th>
+            <th>Valor</th>
+        </tr>
+        <tr *ngFor="let dc of dataConcepts">
+            <th>{{dc.nameField}}</th>
+            <td>{{dc.value}}</td>
+        </tr>
+    </table>
+</div>
