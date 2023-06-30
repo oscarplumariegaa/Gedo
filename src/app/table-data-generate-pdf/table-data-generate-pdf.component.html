@@ -1,13 +1,64 @@
-<div class="col-md-8" id="htmlData">
-    <p>Cliente: {{data.bill.idClient}}</p>
-    <table class="table table-bordered">
-        <tr class="table-primary">
-            <th>Concepto</th>
-            <th>Valor</th>
-        </tr>
-        <tr *ngFor="let dc of dataConcepts">
-            <th>{{dc.nameField}}</th>
-            <td>{{dc.value}}</td>
-        </tr>
-    </table>
+<div class="content">
+  <div class="container">
+    <div class="table-responsive">
+      <table id="tableToPDF" class="table table-hover table-borderless">
+        <thead>
+          <tr>
+            <th style="font-size: 22px">
+              Factura #{{ dataConcepts[1].nameBudget }}
+            </th>
+          </tr>
+          <div>
+            <tr>
+              <th class="text-left">
+                Cliente {{ dataConcepts[1].nameClient }}
+              </th>
+            </tr>
+            <tr>
+              <th class="text-left">Dirección {{ dataConcepts[2].address }}</th>
+            </tr>
+            <tr>
+              <th class="text-left">
+                Teléfono {{ dataConcepts[2].phoneNumber }}
+              </th>
+            </tr>
+          </div>
+        </thead>
+        <thead>
+          <tr>
+            <th style="width: 25%" class="text-center" scope="col">Concepto</th>
+            <th></th>
+            <th></th>
+            <th style="width: 25%" class="text-center" scope="col">Valor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr scope="row" *ngFor="let dc of dataConcepts[0]">
+            <td class="col-md-1 text-center">{{ dc.nameField }}</td>
+            <td></td>
+            <td></td>
+            <td class="col-md-1 text-center">{{ dc.value }}</td>
+          </tr>
+          <tr class="noborders">
+            <td colspan="2" class="noborders"></td>
+            <th class="text-right" scope="row">Importe</th>
+            <td class="text-center">{{ dataConcepts[1].import }}</td>
+          </tr>
+          <tr>
+            <td colspan="2" class="noborders"></td>
+            <th class="text-right" scope="row">Importe con IVA %</th>
+            <td class="text-center">{{ dataConcepts[1].importIVA }}</td>
+          </tr>
+        </tbody>
+        <div>
+            <tr>
+                <th>
+                    <button mat-raised-button (click)="generatePDF()" color="primary">Generar PDF</button>
+                    <button mat-raised-button style="margin-left: 5px;" (click)="openDialog()" color="warn">Cerrar</button>
+                </th>
+              </tr>
+        </div>
+      </table>
+    </div>
+  </div>
 </div>

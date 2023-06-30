@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ApiService } from '../services/api.service';
-
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
 import { DeleteItemComponent } from '../delete-item/delete-item.component';
 import { AddItemComponent } from '../add-item/add-item.component';
 import { TableDataGeneratePdfComponent } from '../table-data-generate-pdf/table-data-generate-pdf.component';
@@ -52,20 +49,5 @@ export class BillsListComponent {
         });
         break;
     }
-  }
-
-  generatePDF(bill:any){
-    this.service.getBudgetConcepts(bill.idBudget).subscribe((data: any) =>{
-      html2canvas(data).then((canvas) =>{
-        let fileWidth = 208;
-        let fileHeight = (canvas.height * fileWidth) / canvas.width;
-        const FILEURI = canvas.toDataURL('image/png');
-        let PDF = new jsPDF('p', 'mm', 'a4');
-        let position = 0;
-        PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
-        PDF.save('angular-demo.pdf');
-      })
-    })
-    //console.log(bill);
   }
 }
