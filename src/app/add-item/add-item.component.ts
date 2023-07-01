@@ -159,13 +159,18 @@ export class AddItemComponent {
     }
   }
   addFieldValue() {
-    let importBudget = this.addBudgetForm.controls['Import'].value;
+    let importBudget = parseInt(this.addBudgetForm.controls['Import'].value);
+    if(isNaN(importBudget)){
+      importBudget = 0;
+    }
+
     if (this.data.budget) {
       this.newConcept['idBudget'] = this.data.budget.idBudget;
     }
     this.fieldArray.push(this.newConcept);
-    importBudget += this.newConcept.value;
+    importBudget += parseInt(this.newConcept.value);
     this.addBudgetForm.controls['Import'].setValue(importBudget);
+    this.addBudgetForm.controls['ImportIVA'].setValue(importBudget * 1.21);
     this.newConcept = {};
   }
 
