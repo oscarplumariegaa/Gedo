@@ -131,7 +131,8 @@ export class AddItemComponent {
       {
         "idUser": 2,
         "idClient": this.data.budget.idClient,
-        "idBudget": this.data.budget.idBudget
+        "idBudget": this.data.budget.idBudget,
+        "nameBill": this.data.budget.nameBudget
       };
       this.service.postBill(arrBill).subscribe(data => {
         this.conceptsFunction('bill', this.fieldArray, this.conceptData);
@@ -143,9 +144,10 @@ export class AddItemComponent {
       })
     }
     if (this.data.action === 'budget') {
+      this.addBudgetForm.removeControl('IdBill');
       this.service.postBudget(this.addBudgetForm.value).subscribe(data => {
         this.conceptsFunction('budget', this.fieldArray, 0);
-        window.location.reload();
+        //window.location.reload();
       })
     }
     if (this.data.budget) {
@@ -157,8 +159,13 @@ export class AddItemComponent {
     }
   }
   addFieldValue() {
-    this.newConcept['idBudget'] = this.data.budget.idBudget;
+    let importBudget = this.addBudgetForm.controls['Import'].value;
+    if (this.data.budget) {
+      this.newConcept['idBudget'] = this.data.budget.idBudget;
+    }
     this.fieldArray.push(this.newConcept);
+    importBudget += this.newConcept.value;
+    this.addBudgetForm.controls['Import'].setValue(importBudget);
     this.newConcept = {};
   }
 
@@ -169,10 +176,21 @@ export class AddItemComponent {
   conceptsFunction(action: string, newConcepts: any, toEditConcepts: any) {
     if (action === 'budget') {
       if (toEditConcepts.length > 0) {
-        this.service.editConcepts(this.data.budget.idBudget, toEditConcepts).subscribe(data => { })
-      }
-      if (newConcepts.length > 0) {
-        this.service.editConcepts(this.data.budget.idBudget, newConcepts).subscribe(data => { })
+        if (toEditConcepts.length > 0) {
+          this.service.editConcepts(this.data.budget.idBudget, toEditConcepts).subscribe(data => { })
+        }
+        if (newConcepts.length > 0) {
+          this.service.editConcepts(this.data.budget.idBudget, newConcepts).subscribe(data => { })
+        }
+      } else {
+        this.service.lastIdBudgetByUser(2).subscribe((data: any) => {
+          for (let i = 0; i < newConcepts.length; i++) {
+            newConcepts[i].idBudget = data.idBudget;
+          }
+          if (newConcepts.length > 0) {
+            this.service.editConcepts(data.idBudget, newConcepts).subscribe(data => { })
+          }
+        })
       }
     } else {
       this.service.billByBudget(this.data.budget.idBudget).subscribe((id: any) => {

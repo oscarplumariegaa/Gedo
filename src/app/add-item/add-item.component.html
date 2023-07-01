@@ -83,7 +83,7 @@
             </td>
             <td>
               <mat-form-field>
-                <input matInput id="newValue" [(ngModel)]="newConcept.value" [ngModelOptions]="{standalone: true}"
+                <input matInput type="number" id="newValue" [(ngModel)]="newConcept.value" [ngModelOptions]="{standalone: true}"
                   name="newConceptValue" placeholder="Valor">
               </mat-form-field>
             </td>
@@ -96,13 +96,13 @@
               <td>
                 <mat-form-field>
                   <input matInput [(ngModel)]="c.nameField" [ngModelOptions]="{standalone: true}" name="{{c.nameField}}"
-                    placeholder="City">
+                    placeholder="Concepto">
                 </mat-form-field>
               </td>
               <td>
                 <mat-form-field>
-                  <input matInput [(ngModel)]="c.value" [ngModelOptions]="{standalone: true}" name="{{c.value}}"
-                    placeholder="State">
+                  <input matInput type="number" [(ngModel)]="c.value" [ngModelOptions]="{standalone: true}" name="{{c.value}}"
+                    placeholder="Valor">
                 </mat-form-field>
               </td>
               <td>
@@ -115,13 +115,13 @@
               <td>
                 <mat-form-field>
                   <input matInput [(ngModel)]="field.nameField" [ngModelOptions]="{standalone: true}"
-                    name="{{field.nameField}}" placeholder="City">
+                    name="{{field.nameField}}" placeholder="Concepto">
                 </mat-form-field>
               </td>
               <td>
                 <mat-form-field>
-                  <input matInput [(ngModel)]="field.value" [ngModelOptions]="{standalone: true}" name="{{field.value}}"
-                    placeholder="State">
+                  <input matInput type="number" [(ngModel)]="field.value" [ngModelOptions]="{standalone: true}" name="{{field.value}}"
+                    placeholder="Valor">
                 </mat-form-field>
               </td>
               <td>

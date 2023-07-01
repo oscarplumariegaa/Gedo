@@ -29,6 +29,11 @@ export class DeleteItemComponent {
         window.location.reload();
       })
     }
+    if (this.data.action === 'bill') {
+      this.service.deleteBill(this.data.idBill).subscribe(data => {
+        window.location.reload();
+      })
+    }
   }
 
   openDialog(): void {

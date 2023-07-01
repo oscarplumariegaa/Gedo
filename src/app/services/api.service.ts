@@ -70,6 +70,9 @@ export class ApiService {
     deleteBudget(id:number){
       return this.http.delete<any>(this.API_URL + 'Budgets/' + id);
     }
+    deleteBill(id:number){
+      return this.http.delete<any>(this.API_URL + 'Bills/' + id);
+    }
     getClientsByUser(id: number){
       return this.http.get(this.API_URL + 'Clients/ClientsByUser/' + id);
     }

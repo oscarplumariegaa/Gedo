@@ -11,7 +11,7 @@ import { TableDataGeneratePdfComponent } from '../table-data-generate-pdf/table-
   styleUrls: ['./bills-list.component.css']
 })
 export class BillsListComponent {
-  displayedColumns: string[] = ['IdBill', 'Client', 'Actions'];
+  displayedColumns: string[] = ['BillName', 'Client', 'Actions'];
   dataSource: any = [];
 
   constructor(public dialog: MatDialog, private service: ApiService) { }
