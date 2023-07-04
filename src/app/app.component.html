@@ -1,13 +1,9 @@
 <div class="header">
   <a href="#default" class="logo">Gedo</a>
   <div class="header-right">
-    <a class="active">Inicio</a>
+    <a routerLink="home">Inicio</a>
     <a>Contabilidad</a>
+    <a routerLink="register">Registrarse</a>
   </div>
 </div>
-<mat-tab-group style="padding-left:1%; padding-right: 1%;" mat-stretch-tabs="false" mat-align-tabs="start" animationDuration="2ms">
-  <mat-tab label="Facturas"><app-bills-list></app-bills-list></mat-tab>
-  <mat-tab label="Presupuestos"><app-budgets-list></app-budgets-list></mat-tab>
-  <mat-tab label="Clientes"><app-clients-list></app-clients-list></mat-tab>
-</mat-tab-group>
-<ng-content></ng-content>
+<router-outlet></router-outlet>

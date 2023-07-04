@@ -1,0 +1,35 @@
+<mat-grid-list cols="1" rowHeight="500px">
+    <mat-grid-tile>
+        <div class="example-container">
+            <mat-form-field appearance="fill" class="width-50">
+                <mat-label>Nombre empresa</mat-label>
+                <input matInput>
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill" class="width-100">
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="ejemplo@ejemplo.com">
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill" class="width-100">
+                <mat-label>Dirección</mat-label>
+                <input matInput>
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill" class="width-100">
+                <mat-label>CIF</mat-label>
+                <input matInput>
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill" class="width-100">
+                <mat-label>Contraseña</mat-label>
+                <input matInput [type]="hide ? 'password' : 'text'">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
+            <br>
+        </div>
+    </mat-grid-tile>
+</mat-grid-list>

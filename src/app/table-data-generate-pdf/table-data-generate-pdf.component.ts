@@ -28,6 +28,7 @@ export class TableDataGeneratePdfComponent {
       this.service.getClientById(dataBudget.idClient).subscribe((client: any) => {
         this.service.getBudgetConcepts(this.data.bill.idBudget).subscribe((dataConcepts: any) => {
           this.dataConcepts = [dataConcepts, dataBudget, client];
+          console.log(this.dataConcepts);
         })
       })
     })
@@ -36,6 +37,15 @@ export class TableDataGeneratePdfComponent {
   openDialog(): void {
     this.dialog.closeAll();
   }
+
+  generateBodyConcepts(){
+    let arr = [];
+    for (let i = 0; i < this.dataConcepts[0].length; i++) {
+      arr.push([this.dataConcepts[0][i].nameField, this.dataConcepts[0][i].value]);
+    }
+    return arr;
+  }
+
 
   generatePDF() {
     const doc = new jsPDF();
@@ -46,11 +56,13 @@ export class TableDataGeneratePdfComponent {
         [{ content: 'Cliente ' + this.dataConcepts[2].nameClient, styles: { halign: 'left', fillColor: [20, 120, 110] } },
         { content: 'Empresa ' + this.dataConcepts[2].nameClient, styles: { halign: 'left', fillColor: [20, 120, 110] } }],
         [{ content: 'Teléfono ' + this.dataConcepts[2].phoneNumber, styles: { halign: 'left', fillColor: [20, 120, 110] } }],
+        [['Concepto'], ['Valor']],
+        /*[{ content: 'Importe ' + this.dataConcepts[1].import, styles: { halign: 'left', fillColor: [20, 120, 110] } },
+        { content: 'Importe IVA ' + this.dataConcepts[1].importIVA, styles: { halign: 'left', fillColor: [20, 120, 110] } }],*/
       ],
-      body: [
-        [this.dataConcepts[2].phoneNumber]
-      ]
+      body: this.generateBodyConcepts(),
+      foot:[[' ', 'Importe Total', this.dataConcepts[1].import, '  '],[' ', 'Importe Total IVA% incluido', this.dataConcepts[1].importIVA, '  ']]
     });
-    doc.save('table.pdf');
+    doc.save('factura'+this.dataConcepts[1].nameBudget+'.pdf');
   }
 }

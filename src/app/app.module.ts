@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { routing } from './app.routing';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +19,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatListModule } from '@angular/material/list';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatGridListModule} from '@angular/material/grid-list';
+
 
 import { DeleteItemComponent } from './delete-item/delete-item.component';
 import { ClientsListComponent } from './clients-list/clients-list.component';
@@ -26,6 +30,8 @@ import { BudgetsListComponent } from './budgets-list/budgets-list.component';
 import { LoginComponent } from './login/login.component';
 import { AddItemComponent } from './add-item/add-item.component';
 import { TableDataGeneratePdfComponent } from './table-data-generate-pdf/table-data-generate-pdf.component';
+import { RegisterComponent } from './register/register.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -36,10 +42,13 @@ import { TableDataGeneratePdfComponent } from './table-data-generate-pdf/table-d
     BudgetsListComponent,
     LoginComponent,
     AddItemComponent,
-    TableDataGeneratePdfComponent
+    TableDataGeneratePdfComponent,
+    RegisterComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
+    routing,
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
@@ -54,7 +63,9 @@ import { TableDataGeneratePdfComponent } from './table-data-generate-pdf/table-d
     MatTableModule,
     MatTabsModule,
     MatToolbarModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatRadioModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

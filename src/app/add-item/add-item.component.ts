@@ -134,8 +134,10 @@ export class AddItemComponent {
         "idBudget": this.data.budget.idBudget,
         "nameBill": this.data.budget.nameBudget
       };
+
       this.service.postBill(arrBill).subscribe(data => {
         this.conceptsFunction('bill', this.fieldArray, this.conceptData);
+        window.location.reload();
       })
     }
     if (this.data.action === 'client') {
@@ -147,7 +149,7 @@ export class AddItemComponent {
       this.addBudgetForm.removeControl('IdBill');
       this.service.postBudget(this.addBudgetForm.value).subscribe(data => {
         this.conceptsFunction('budget', this.fieldArray, 0);
-        //window.location.reload();
+        window.location.reload();
       })
     }
     if (this.data.budget) {
@@ -155,6 +157,7 @@ export class AddItemComponent {
       this.addBudgetForm.removeControl('IdBill');
       this.service.editBudget(this.data.budget.idBudget, this.addBudgetForm.value).subscribe(data => {
         this.conceptsFunction('budget', this.fieldArray, this.conceptData);
+        window.location.reload();
       })
     }
   }
@@ -168,7 +171,7 @@ export class AddItemComponent {
       this.newConcept['idBudget'] = this.data.budget.idBudget;
     }
     this.fieldArray.push(this.newConcept);
-    importBudget += parseInt(this.newConcept.value);
+    importBudget += parseFloat(this.newConcept.value);
     this.addBudgetForm.controls['Import'].setValue(importBudget);
     this.addBudgetForm.controls['ImportIVA'].setValue(importBudget * 1.21);
     this.newConcept = {};
@@ -205,7 +208,8 @@ export class AddItemComponent {
           for (let i = 0; i < toEditConcepts.length; i++) {
             toEditConcepts[i]['idBill'] = id;
           }
-          this.service.editConcepts(this.data.budget.idBudget, toEditConcepts).subscribe(data => { })
+          this.service.editConcepts(this.data.budget.idBudget, toEditConcepts).subscribe(data => {
+           })
         }
       })
     }
