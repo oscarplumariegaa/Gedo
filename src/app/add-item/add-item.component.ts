@@ -132,7 +132,8 @@ export class AddItemComponent {
         "idUser": 2,
         "idClient": this.data.budget.idClient,
         "idBudget": this.data.budget.idBudget,
-        "nameBill": this.data.budget.nameBudget
+        "nameBill": this.data.budget.nameBudget,
+        "nameClient": this.data.budget.nameClient
       };
 
       this.service.postBill(arrBill).subscribe(data => {

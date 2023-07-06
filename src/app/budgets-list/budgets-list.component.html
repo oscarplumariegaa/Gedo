@@ -2,18 +2,18 @@
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   <ng-container matColumnDef="NameBudget">
     <th mat-header-cell *matHeaderCellDef> Nombre </th>
-    <td mat-cell *matCellDef="let budget"> {{budget.nameBudget}} </td>
+    <td mat-cell *matCellDef="let budget">Presupuesto #{{budget.nameBudget}} </td>
   </ng-container>
     <ng-container matColumnDef="Client">
       <th mat-header-cell *matHeaderCellDef> Cliente </th>
       <td mat-cell *matCellDef="let budget"> {{budget.nameClient}} </td>
     </ng-container>
     <ng-container matColumnDef="Import">
-      <th mat-header-cell *matHeaderCellDef> Email </th>
+      <th mat-header-cell *matHeaderCellDef> Importe Total </th>
       <td mat-cell *matCellDef="let budget"> {{budget.import}} </td>
     </ng-container>
     <ng-container matColumnDef="ImportIVA">
-      <th mat-header-cell *matHeaderCellDef> ImportIVA </th>
+      <th mat-header-cell *matHeaderCellDef> Import Total con IVA </th>
       <td mat-cell *matCellDef="let budget"> {{budget.importIVA}} </td>
     </ng-container>
     <ng-container matColumnDef="Actions">
