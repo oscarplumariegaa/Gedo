@@ -88,4 +88,9 @@ export class ApiService {
     billByBudget(id:number){
       return this.http.get(this.API_URL + 'Bills/BillBudget/'+id);
     }
+    registerUser(arrUser: any){
+      const headers = { 'content-type': 'application/json' }
+      const body = JSON.stringify(arrUser);
+      return this.http.post<any>(this.API_URL + 'Users', body, { 'headers': headers });
+    }
 }

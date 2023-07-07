@@ -1,35 +1,43 @@
-<mat-grid-list cols="1" rowHeight="500px">
+<form [formGroup]="addUserForm" class="dialog-form">
+<mat-grid-list cols="1" rowHeight="600px">
     <mat-grid-tile>
         <div class="example-container">
             <mat-form-field appearance="fill" class="width-50">
                 <mat-label>Nombre empresa</mat-label>
-                <input matInput>
+                <input formControlName="Name" matInput>
             </mat-form-field>
             <br>
             <mat-form-field appearance="fill" class="width-100">
                 <mat-label>Email</mat-label>
-                <input matInput placeholder="ejemplo@ejemplo.com">
+                <input formControlName="Email" matInput placeholder="ejemplo@ejemplo.com">
             </mat-form-field>
             <br>
             <mat-form-field appearance="fill" class="width-100">
                 <mat-label>Dirección</mat-label>
-                <input matInput>
+                <input formControlName="Address" matInput>
             </mat-form-field>
             <br>
             <mat-form-field appearance="fill" class="width-100">
                 <mat-label>CIF</mat-label>
-                <input matInput>
+                <input formControlName="CIF" matInput>
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill" class="width-100">
+                <mat-label>Teléfono</mat-label>
+                <input formControlName="PhoneNumber" type="number" matInput>
             </mat-form-field>
             <br>
             <mat-form-field appearance="fill" class="width-100">
                 <mat-label>Contraseña</mat-label>
-                <input matInput [type]="hide ? 'password' : 'text'">
+                <input formControlName="Password" matInput [type]="hide ? 'password' : 'text'">
                 <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                     [attr.aria-pressed]="hide">
                     <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
             </mat-form-field>
             <br>
+            <button mat-raised-button color="primary" (click)="registerUser()">Registrarse</button>
         </div>
     </mat-grid-tile>
 </mat-grid-list>
+</form>
