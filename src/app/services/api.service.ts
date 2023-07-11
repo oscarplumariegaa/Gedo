@@ -93,4 +93,7 @@ export class ApiService {
       const body = JSON.stringify(arrUser);
       return this.http.post<any>(this.API_URL + 'Users', body, { 'headers': headers });
     }
+    loginUser(email:string, password:string){
+      return this.http.get(this.API_URL + 'Users/Login/' + email + '/' + password);
+    }
 }

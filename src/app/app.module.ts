@@ -30,7 +30,6 @@ import { BudgetsListComponent } from './budgets-list/budgets-list.component';
 import { LoginComponent } from './login/login.component';
 import { AddItemComponent } from './add-item/add-item.component';
 import { TableDataGeneratePdfComponent } from './table-data-generate-pdf/table-data-generate-pdf.component';
-import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 
 @NgModule({
@@ -43,7 +42,6 @@ import { HomeComponent } from './home/home.component';
     LoginComponent,
     AddItemComponent,
     TableDataGeneratePdfComponent,
-    RegisterComponent,
     HomeComponent
   ],
   imports: [
