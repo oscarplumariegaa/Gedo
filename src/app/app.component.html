@@ -3,8 +3,9 @@
   <div class="header-right">
     <a routerLink="home">Inicio</a>
     <a>Contabilidad</a>
-    <a routerLink="login">Iniciar Sesion</a>
+    <a *ngIf="isLogging" routerLink="login">Iniciar Sesion</a>
     <a routerLink="myaccount">Mi Cuenta</a>
+    <a *ngIf="!isLogging" (click)="closeLogin()">Cerrar Sesión</a>
   </div>
 </div>
 

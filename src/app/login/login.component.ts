@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ApiService } from '../services/api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,16 +12,17 @@ export class LoginComponent {
   addUserForm!: FormGroup;
   loginUserForm!: FormGroup;
   hide = true;
+  isLogging: boolean = false;
 
   username: string = "";
   password: string = "";
   show: boolean = false;
   loginmessage: string = "";
-  rolActual!: string;
 
   constructor(
     private fb: FormBuilder,
-    private service: ApiService
+    private service: ApiService,
+    private router: Router
   ){}
 
   ngOnInit() {
@@ -57,7 +59,8 @@ export class LoginComponent {
 
   submit() {
     this.service.loginUser(this.loginUserForm.controls['email'].value, this.loginUserForm.controls['password'].value).subscribe((data: any) => {
-      localStorage.setItem('user', data.name);
+      localStorage.setItem('user', data[0].name);
+      this.router.navigate(['home']);
     }, error => {
       this.show = !this.show;
       this.loginmessage = 'Credenciales no válidas';
