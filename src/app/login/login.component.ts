@@ -59,8 +59,8 @@ export class LoginComponent {
 
   submit() {
     this.service.loginUser(this.loginUserForm.controls['email'].value, this.loginUserForm.controls['password'].value).subscribe((data: any) => {
-      localStorage.setItem('user', data[0].name);
-      this.router.navigate(['home']);
+      localStorage.setItem('idUser', data[0].idUser);
+      this.router.navigate(['main']);
     }, error => {
       this.show = !this.show;
       this.loginmessage = 'Credenciales no válidas';

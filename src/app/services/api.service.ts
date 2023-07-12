@@ -96,4 +96,7 @@ export class ApiService {
     loginUser(email:string, password:string){
       return this.http.get(this.API_URL + 'Users/Login/' + email + '/' + password);
     }
+    dataUser(id: number){
+      return this.http.get(this.API_URL + 'Users/' + id);
+    }
 }

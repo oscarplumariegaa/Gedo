@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-myaccount',
@@ -7,9 +8,15 @@ import { Component } from '@angular/core';
 })
 export class MyaccountComponent {
 
-  username: any = '';
+  idUser: any = '';
+
+  constructor(private service: ApiService) {}
 
   ngOnInit() {
-    this.username = localStorage.getItem('user');
+    this.idUser = localStorage.getItem('idUser');
+    this.service.dataUser(this.idUser).subscribe((data) => {
+      console.log(data);
+    })
+
   }
 }

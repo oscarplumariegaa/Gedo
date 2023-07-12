@@ -32,6 +32,7 @@ import { AddItemComponent } from './add-item/add-item.component';
 import { TableDataGeneratePdfComponent } from './table-data-generate-pdf/table-data-generate-pdf.component';
 import { HomeComponent } from './home/home.component';
 import { MyaccountComponent } from './myaccount/myaccount.component';
+import { MainPanelComponent } from './main-panel/main-panel.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { MyaccountComponent } from './myaccount/myaccount.component';
     AddItemComponent,
     TableDataGeneratePdfComponent,
     HomeComponent,
-    MyaccountComponent
+    MyaccountComponent,
+    MainPanelComponent
   ],
   imports: [
     BrowserModule,

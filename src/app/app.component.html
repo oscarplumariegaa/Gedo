@@ -1,12 +1,1 @@
-<div class="header">
-  <a href="#default" class="logo">Gedo</a>
-  <div class="header-right">
-    <a routerLink="home">Inicio</a>
-    <a>Contabilidad</a>
-    <a *ngIf="isLogging" routerLink="login">Iniciar Sesion</a>
-    <a routerLink="myaccount">Mi Cuenta</a>
-    <a *ngIf="!isLogging" (click)="closeLogin()">Cerrar Sesión</a>
-  </div>
-</div>
-
 <router-outlet></router-outlet>
