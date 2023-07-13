@@ -21,6 +21,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatListModule } from '@angular/material/list';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatCardModule} from '@angular/material/card';
 
 
 import { DeleteItemComponent } from './delete-item/delete-item.component';
@@ -58,6 +59,7 @@ import { MainPanelComponent } from './main-panel/main-panel.component';
     HttpClientModule,
     MatButtonModule,
     MatDialogModule,
+    MatCardModule,
     MatIconModule,
     MatInputModule,
     MatListModule,

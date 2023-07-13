@@ -9,6 +9,7 @@ import { ApiService } from '../services/api.service';
 export class MyaccountComponent {
 
   idUser: any = '';
+  data: any;
 
   constructor(private service: ApiService) {}
 
@@ -16,6 +17,7 @@ export class MyaccountComponent {
     this.idUser = localStorage.getItem('idUser');
     this.service.dataUser(this.idUser).subscribe((data) => {
       console.log(data);
+      this.data = data;
     })
 
   }
