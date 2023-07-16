@@ -13,10 +13,12 @@ import { AddItemComponent } from '../add-item/add-item.component';
 export class ClientsListComponent {
   displayedColumns: string[] = ['NameClient', 'Address', 'Email', 'CIF', 'PhoneNumber', 'Actions'];
   dataSource:any = [];
+  idUser: any;
 
   constructor(public dialog: MatDialog, private service: ApiService){}
   ngOnInit() {
-    this.service.getClients().subscribe(clients => {
+    this.idUser = localStorage.getItem('idUser');
+    this.service.getClientsByUser(this.idUser).subscribe(clients => {
       this.dataSource = clients;
     })
   }

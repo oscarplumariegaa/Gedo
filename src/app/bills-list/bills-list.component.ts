@@ -13,10 +13,12 @@ import { TableDataGeneratePdfComponent } from '../table-data-generate-pdf/table-
 export class BillsListComponent {
   displayedColumns: string[] = ['BillName', 'Client', 'Actions'];
   dataSource: any = [];
+  idUser: any;
 
   constructor(public dialog: MatDialog, private service: ApiService) { }
   ngOnInit() {
-    this.service.getBills(2).subscribe(bills => {
+    this.idUser = localStorage.getItem('idUser');
+    this.service.getBills(this.idUser).subscribe(bills => {
       this.dataSource = bills;
     })
   }

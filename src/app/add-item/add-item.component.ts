@@ -30,10 +30,12 @@ export class AddItemComponent {
   public conceptData: any;
   public nextNameBudget!: string;
   public notEdit: boolean = true;
+  idUser: any;
 
   ngOnInit() {
+    this.idUser = localStorage.getItem('idUser');
     this.newConcept, this.fieldArray = [];
-    this.service.lastIdBudgetByUser(2).subscribe((data: any) => {
+    this.service.lastIdBudgetByUser(this.idUser).subscribe((data: any) => {
       this.lastBudgetId = data.idBudget + 1;
       if (data === 0) {
         this.nextNameBudget = "0000";
@@ -192,12 +194,12 @@ export class AddItemComponent {
           this.service.editConcepts(this.data.budget.idBudget, newConcepts).subscribe(data => { })
         }
       } else {
-        this.service.lastIdBudgetByUser(2).subscribe((data: any) => {
+        this.service.lastIdBudgetByUser(this.idUser).subscribe((data: any) => {
           for (let i = 0; i < newConcepts.length; i++) {
             newConcepts[i].idBudget = data.idBudget;
           }
           if (newConcepts.length > 0) {
-            this.service.editConcepts(data.idBudget, newConcepts).subscribe(data => { })
+            this.service.postConcepts(newConcepts).subscribe(data => { })
           }
         })
       }

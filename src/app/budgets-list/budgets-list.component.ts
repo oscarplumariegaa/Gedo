@@ -12,10 +12,12 @@ import { AddItemComponent } from '../add-item/add-item.component';
 export class BudgetsListComponent {
   displayedColumns: string[] = ['NameBudget', 'Client', 'Import', 'ImportIVA', 'Actions'];
   dataSource: any = [];
+  idUser: any;
 
   constructor(public dialog: MatDialog, private service: ApiService) { }
   ngOnInit() {
-    this.service.getBudgets(2).subscribe(budgets => {
+    this.idUser = localStorage.getItem('idUser');
+    this.service.getBudgets(this.idUser).subscribe(budgets => {
       this.dataSource = budgets;
     })
   }
