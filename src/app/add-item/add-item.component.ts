@@ -35,8 +35,10 @@ export class AddItemComponent {
   ngOnInit() {
     this.idUser = localStorage.getItem('idUser');
     this.newConcept, this.fieldArray = [];
+
     this.service.lastIdBudgetByUser(this.idUser).subscribe((data: any) => {
       this.lastBudgetId = data.idBudget + 1;
+      console.log(this.lastBudgetId);
       if (data === 0) {
         this.nextNameBudget = "0000";
       } else {
@@ -45,8 +47,9 @@ export class AddItemComponent {
     })
     this.addBudgetForm = this.fb.group({
       NameBudget: '',
+      IdBudget: '',
       IdClient: '',
-      IdUser: 2,
+      IdUser: this.idUser,
       Import: '',
       ImportIVA: '',
       IdBill: ''
@@ -55,7 +58,7 @@ export class AddItemComponent {
       NameClient: '',
       Address: '',
       Email: '',
-      IdUser: 2,
+      IdUser: this.idUser,
       CIF: '',
       PhoneNumber: ''
     })
@@ -64,7 +67,7 @@ export class AddItemComponent {
         NameClient: this.data.client.nameClient ? this.data.client.nameClient : '',
         Address: this.data.client.address ? this.data.client.address : '',
         Email: this.data.client.email ? this.data.client.email : '',
-        IdUser: 2,
+        IdUser: this.idUser,
         CIF: this.data.client.cif ? this.data.client.cif : '',
         PhoneNumber: this.data.client.phoneNumber ? this.data.client.phoneNumber : ''
       })
@@ -80,13 +83,13 @@ export class AddItemComponent {
         NameBudget: this.data.budget.nameBudget ? this.data.budget.nameBudget : '',
         NameClient: this.data.budget.nameClient ? this.data.budget.nameClient : '',
         IdClient: this.data.budget.idClient ? this.data.budget.idClient : '',
-        IdUser: 2,
+        IdUser: this.idUser,
         Import: this.data.budget.import ? this.data.budget.import : '',
         ImportIVA: this.data.budget.importIVA ? this.data.budget.importIVA : '',
         IdBill: this.data.budget.idBill ? this.data.budget.idBill : ''
       })
     }
-    this.service.getClientsByUser(2).subscribe(clients => {
+    this.service.getClientsByUser(this.idUser).subscribe(clients => {
       this.clients = clients;
     })
   }
@@ -131,7 +134,7 @@ export class AddItemComponent {
     if (this.data.action === 'createBill') {
       let arrBill =
       {
-        "idUser": 2,
+        "idUser": this.idUser,
         "idClient": this.data.budget.idClient,
         "idBudget": this.data.budget.idBudget,
         "nameBill": this.data.budget.nameBudget,
@@ -150,6 +153,8 @@ export class AddItemComponent {
     }
     if (this.data.action === 'budget') {
       this.addBudgetForm.removeControl('IdBill');
+      this.addBudgetForm.controls['IdBudget'].setValue(this.lastBudgetId);
+      console.log(this.addBudgetForm.value);
       this.service.postBudget(this.addBudgetForm.value).subscribe(data => {
         this.conceptsFunction('budget', this.fieldArray, 0);
         window.location.reload();
@@ -166,22 +171,36 @@ export class AddItemComponent {
   }
   addFieldValue() {
     let importBudget = parseInt(this.addBudgetForm.controls['Import'].value);
-    if(isNaN(importBudget)){
-      importBudget = 0;
-    }
 
     if (this.data.budget) {
       this.newConcept['idBudget'] = this.data.budget.idBudget;
     }
+
+    this.calculateImport(importBudget, parseFloat(this.newConcept.value), 'sum');
+
     this.fieldArray.push(this.newConcept);
-    importBudget += parseFloat(this.newConcept.value);
-    this.addBudgetForm.controls['Import'].setValue(importBudget);
-    this.addBudgetForm.controls['ImportIVA'].setValue(importBudget * 1.21);
     this.newConcept = {};
   }
 
   deleteFieldValue(index: number) {
+    let importBudget = parseInt(this.addBudgetForm.controls['Import'].value);
+    this.calculateImport(importBudget, parseFloat(this.fieldArray[index].value), 'res');
+
     this.fieldArray.splice(index, 1);
+  }
+
+  calculateImport(a: any, b: any, o:any){
+    if(isNaN(a)){
+      a = 0;
+    }
+    if(o == 'res'){
+      a = a - b;
+    }else{
+      a = a + b;
+    }
+
+    this.addBudgetForm.controls['Import'].setValue(a);
+    this.addBudgetForm.controls['ImportIVA'].setValue(a * 1.21);
   }
 
   conceptsFunction(action: string, newConcepts: any, toEditConcepts: any) {
@@ -194,14 +213,13 @@ export class AddItemComponent {
           this.service.editConcepts(this.data.budget.idBudget, newConcepts).subscribe(data => { })
         }
       } else {
-        this.service.lastIdBudgetByUser(this.idUser).subscribe((data: any) => {
+        console.log(this.lastBudgetId);
           for (let i = 0; i < newConcepts.length; i++) {
-            newConcepts[i].idBudget = data.idBudget;
+            newConcepts[i].idBudget = this.lastBudgetId;
           }
           if (newConcepts.length > 0) {
             this.service.postConcepts(newConcepts).subscribe(data => { })
           }
-        })
       }
     } else {
       this.service.billByBudget(this.data.budget.idBudget).subscribe((id: any) => {
