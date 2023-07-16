@@ -31,8 +31,10 @@ export class AddItemComponent {
   public nextNameBudget!: string;
   public notEdit: boolean = true;
   idUser: any;
+  year: any;
 
   ngOnInit() {
+    this.year =  new Date().getFullYear().toString().substring(2,4);
     this.idUser = localStorage.getItem('idUser');
     this.newConcept, this.fieldArray = [];
 
@@ -40,7 +42,7 @@ export class AddItemComponent {
       this.lastBudgetId = data.idBudget + 1;
       console.log(this.lastBudgetId);
       if (data === 0) {
-        this.nextNameBudget = "0000";
+        this.nextNameBudget = "0000" + '-' + this.year;
       } else {
         this.padNumber(data.nameBudget);
       }
@@ -107,6 +109,8 @@ export class AddItemComponent {
   }
 
   padNumber(num: any) {
+    let nsplit = num.split('-');
+    num = nsplit[0];
     let nNumber: number = +num + 1;
     let n = nNumber.toString();
     let size = n.toString().length;
@@ -117,7 +121,7 @@ export class AddItemComponent {
     } else if (size === 3) {
       n = "0" + nNumber;
     }
-    this.nextNameBudget = n;
+    this.nextNameBudget = n + '-' + this.year;
   }
 
   formChanged() {
@@ -154,7 +158,7 @@ export class AddItemComponent {
     if (this.data.action === 'budget') {
       this.addBudgetForm.removeControl('IdBill');
       this.addBudgetForm.controls['IdBudget'].setValue(this.lastBudgetId);
-      console.log(this.addBudgetForm.value);
+
       this.service.postBudget(this.addBudgetForm.value).subscribe(data => {
         this.conceptsFunction('budget', this.fieldArray, 0);
         window.location.reload();
