@@ -39,11 +39,11 @@ export class AddItemComponent {
     this.newConcept, this.fieldArray = [];
 
     this.service.lastIdBudgetByUser(this.idUser).subscribe((data: any) => {
-      this.lastBudgetId = data.idBudget + 1;
-      console.log(this.lastBudgetId);
       if (data === 0) {
+        this.lastBudgetId = data + 1;
         this.nextNameBudget = "0000" + '-' + this.year;
       } else {
+        this.lastBudgetId = data.idBudget + 1;
         this.padNumber(data.nameBudget);
       }
     })
@@ -54,7 +54,8 @@ export class AddItemComponent {
       IdUser: this.idUser,
       Import: '',
       ImportIVA: '',
-      IdBill: ''
+      IdBill: '',
+      IVA: 0
     })
     this.addClientForm = this.fb.group({
       NameClient: '',
@@ -88,7 +89,8 @@ export class AddItemComponent {
         IdUser: this.idUser,
         Import: this.data.budget.import ? this.data.budget.import : '',
         ImportIVA: this.data.budget.importIVA ? this.data.budget.importIVA : '',
-        IdBill: this.data.budget.idBill ? this.data.budget.idBill : ''
+        IdBill: this.data.budget.idBill ? this.data.budget.idBill : '',
+        IVA: this.data.budget.iva ? this.data.budget.iva : ''
       })
     }
     this.service.getClientsByUser(this.idUser).subscribe(clients => {
@@ -158,6 +160,7 @@ export class AddItemComponent {
     if (this.data.action === 'budget') {
       this.addBudgetForm.removeControl('IdBill');
       this.addBudgetForm.controls['IdBudget'].setValue(this.lastBudgetId);
+      this.addBudgetForm.controls['IVA'].setValue(parseInt(this.addBudgetForm.controls['IVA'].value));
 
       this.service.postBudget(this.addBudgetForm.value).subscribe(data => {
         this.conceptsFunction('budget', this.fieldArray, 0);
@@ -204,7 +207,22 @@ export class AddItemComponent {
     }
 
     this.addBudgetForm.controls['Import'].setValue(a);
-    this.addBudgetForm.controls['ImportIVA'].setValue(a * 1.21);
+
+    if(this.addBudgetForm.controls['IVA'].value > 0){
+      if(this.addBudgetForm.controls['IVA'].value == 10){
+        this.addBudgetForm.controls['ImportIVA'].setValue(a * 1.1);
+      }else{
+        this.addBudgetForm.controls['ImportIVA'].setValue(a * 1.21);
+      }
+    }
+  }
+
+  ivaChange(iva: any){
+    if(iva == 10){
+      this.addBudgetForm.controls['ImportIVA'].setValue(this.addBudgetForm.controls['Import'].value * 1.1);
+    }else{
+      this.addBudgetForm.controls['ImportIVA'].setValue(this.addBudgetForm.controls['Import'].value * 1.21);
+    }
   }
 
   conceptsFunction(action: string, newConcepts: any, toEditConcepts: any) {

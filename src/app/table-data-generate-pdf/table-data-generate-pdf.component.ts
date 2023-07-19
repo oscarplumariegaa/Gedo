@@ -32,7 +32,6 @@ export class TableDataGeneratePdfComponent {
           this.service.dataUser(this.idUser).subscribe((dataUser: any) => {
             this.dataConcepts = [dataConcepts, dataBudget, client, dataUser];
           })
-          console.log(this.dataConcepts);
         })
       })
     })
@@ -45,11 +44,10 @@ export class TableDataGeneratePdfComponent {
   generateBodyConcepts(){
     let arr = [];
     for (let i = 0; i < this.dataConcepts[0].length; i++) {
-      arr.push([this.dataConcepts[0][i].nameField, this.dataConcepts[0][i].value+'€']);
+      arr.push([this.dataConcepts[0][i].nameField, '', this.dataConcepts[0][i].value+'€']);
     }
     return arr;
   }
-
 
   generatePDF() {
     const doc = new jsPDF();
@@ -57,16 +55,19 @@ export class TableDataGeneratePdfComponent {
       head: [
         [{ content: 'Factura #' + this.dataConcepts[1].nameBudget, colSpan: 3, styles: { halign: 'center', fillColor: [22, 160, 133] } }
         ],
-        [{ content: 'Cliente ' + this.dataConcepts[2].nameClient, styles: { halign: 'left', fillColor: [20, 120, 110] } },
-        { content: 'Empresa ' + this.dataConcepts[3].name, styles: { halign: 'left', fillColor: [20, 120, 110] } }],
+        [{ content: 'Cliente ' + this.dataConcepts[2].nameClient, styles: { halign: 'left', fillColor: [20, 90, 110] } },
+        { content: ' ', styles: { halign: 'left', fillColor: [20, 120, 110] } },
+        { content: 'Empresa ' + this.dataConcepts[3].name, styles: { halign: 'left', fillColor: [20, 90, 110] } }],
         [{ content: 'Teléfono ' + this.dataConcepts[2].phoneNumber, styles: { halign: 'left', fillColor: [20, 120, 110] } },
+        { content: ' ', styles: { halign: 'left', fillColor: [20, 120, 110] } },
         { content: 'Teléfono ' + this.dataConcepts[3].phoneNumber, styles: { halign: 'left', fillColor: [20, 120, 110] } }
         ],
         [
           { content: 'Dirección ' + this.dataConcepts[2].address, styles: { halign: 'left', fillColor: [20, 120, 110] } },
+          { content: ' ', styles: { halign: 'left', fillColor: [20, 120, 110] } },
           { content: 'Dirección ' + this.dataConcepts[3].address, styles: { halign: 'left', fillColor: [20, 120, 110] } }
         ],
-        [['Concepto'], ['Valor']],
+        [['Concepto'], [''], ['Valor']],
         /*[{ content: 'Importe ' + this.dataConcepts[1].import, styles: { halign: 'left', fillColor: [20, 120, 110] } },
         { content: 'Importe IVA ' + this.dataConcepts[1].importIVA, styles: { halign: 'left', fillColor: [20, 120, 110] } }],*/
       ],

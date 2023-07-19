@@ -68,6 +68,13 @@
           <input readonly="true" formControlName="Import" matInput placeholder="Importe" />
         </mat-form-field>
         <mat-form-field>
+          <mat-label>IVA</mat-label>
+          <mat-select (selectionChange)="ivaChange($event.value)" formControlName="IVA" placeholder="IVA">
+            <mat-option [value]=10>10%</mat-option>
+            <mat-option [value]=21>21%</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
           <mat-label>Importe IVA</mat-label>
           <input readonly="true" formControlName="ImportIVA" matInput placeholder="Importe IVA" />
         </mat-form-field>

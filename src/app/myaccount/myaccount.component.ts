@@ -16,7 +16,6 @@ export class MyaccountComponent {
   ngOnInit() {
     this.idUser = localStorage.getItem('idUser');
     this.service.dataUser(this.idUser).subscribe((data) => {
-      console.log(data);
       this.data = data;
     })
 
