@@ -52,7 +52,7 @@ export class TableDataGeneratePdfComponent {
   generatePDF() {
     const doc = new jsPDF();
     let img = new Image();
-    img.src = 'https://res.cloudinary.com/dwalmtf3j/image/upload/v1690204726/logos/logo_fmffoo.png';
+    img.src = this.dataConcepts[3].logo;
     autoTable(doc, {
       styles: {
         fontSize: 12

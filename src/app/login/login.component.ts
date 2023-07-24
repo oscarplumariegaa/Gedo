@@ -54,6 +54,8 @@ export class LoginComponent {
   }
   registerUser(){
     this.service.registerUser(this.addUserForm.value).subscribe((data: any) => {
+      this.router.navigate(['']);
+      window.location.reload();
     })
   }
 

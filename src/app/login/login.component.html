@@ -7,9 +7,9 @@
 
 
   <mat-tab class="tab" label="Iniciar Sesión">
-    <p>
-      <img style="width:300px;" src="https://1000marcas.net/wp-content/uploads/2020/11/App-Store-logo.png" alt="">
-    </p>
+    <div style="text-align: center; padding-top:5%">
+      <img style="width:250px;" src="https://1000marcas.net/wp-content/uploads/2020/11/App-Store-logo.png" alt="">
+    </div>
     <form [formGroup]="loginUserForm" class="example-form">
       <p>
         <mat-form-field class="example-full-width" appearance="fill">
@@ -39,7 +39,11 @@
   </form>
   </mat-tab>
   <mat-tab class="tab" label="Registrarse">
-    <form [formGroup]="addUserForm" class="dialog-form">    <mat-grid-list cols="1" rowHeight="600px">
+    <div style="text-align: center; padding-top:5%">
+      <img style="width:250px;" src="https://1000marcas.net/wp-content/uploads/2020/11/App-Store-logo.png" alt="">
+    </div>
+    <form [formGroup]="addUserForm" class="dialog-form">    
+      <mat-grid-list cols="1" rowHeight="600px">
       <mat-grid-tile>
           <div class="example-container">
               <mat-form-field appearance="fill" class="width-50">
