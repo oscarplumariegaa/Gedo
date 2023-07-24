@@ -90,6 +90,12 @@
             </td>
             <td>
               <mat-form-field>
+                <input matInput id="newUnitsField" [(ngModel)]="newConcept.units"
+                  [ngModelOptions]="{standalone: true}" name="newUnitsField" placeholder="Unidades">
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field>
                 <input matInput type="number" step="0.1" id="newValue" [(ngModel)]="newConcept.value" [ngModelOptions]="{standalone: true}"
                   name="newConceptValue" placeholder="Valor">
               </mat-form-field>
@@ -104,6 +110,12 @@
                 <mat-form-field>
                   <input matInput [(ngModel)]="c.nameField" [ngModelOptions]="{standalone: true}" name="{{c.nameField}}"
                     placeholder="Concepto">
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field>
+                  <input matInput type="number" [(ngModel)]="c.units" [ngModelOptions]="{standalone: true}" name="{{c.units}}"
+                    placeholder="Unidades">
                 </mat-form-field>
               </td>
               <td>
@@ -123,6 +135,12 @@
                 <mat-form-field>
                   <input matInput [(ngModel)]="field.nameField" [ngModelOptions]="{standalone: true}"
                     name="{{field.nameField}}" placeholder="Concepto">
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field>
+                  <input matInput type="number" [(ngModel)]="field.units" [ngModelOptions]="{standalone: true}" name="{{field.units}}"
+                    placeholder="Unidades">
                 </mat-form-field>
               </td>
               <td>

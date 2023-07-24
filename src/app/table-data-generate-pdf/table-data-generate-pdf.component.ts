@@ -44,7 +44,7 @@ export class TableDataGeneratePdfComponent {
   generateBodyConcepts(){
     let arr = [];
     for (let i = 0; i < this.dataConcepts[0].length; i++) {
-      arr.push([this.dataConcepts[0][i].nameField, '', this.dataConcepts[0][i].value+'€']);
+      arr.push([this.dataConcepts[0][i].nameField, this.dataConcepts[0][i].units, this.dataConcepts[0][i].value+'€']);
     }
     return arr;
   }
@@ -57,7 +57,7 @@ export class TableDataGeneratePdfComponent {
       styles: {
         fontSize: 12
       },
-      startY: 50,
+      startY: 55,
       head: [
         [{ content: 'Factura #' + this.dataConcepts[1].nameBudget, colSpan: 3, styles: { halign: 'center', fillColor: [22, 160, 133] } }
         ],
@@ -73,12 +73,12 @@ export class TableDataGeneratePdfComponent {
           { content: ' ', styles: { halign: 'left', fillColor: [20, 120, 110] } },
           { content: 'Dirección ' + this.dataConcepts[3].address, styles: { halign: 'left', fillColor: [20, 120, 110] } }
         ],
-        [['Concepto'], [''], ['Valor']],
+        [['Concepto'], ['Unidades'], ['Valor']],
         /*[{ content: 'Importe ' + this.dataConcepts[1].import, styles: { halign: 'left', fillColor: [20, 120, 110] } },
         { content: 'Importe IVA ' + this.dataConcepts[1].importIVA, styles: { halign: 'left', fillColor: [20, 120, 110] } }],*/
       ],
       body: this.generateBodyConcepts(),
-      foot:[[' ', 'Importe Total', this.dataConcepts[1].import+'€', '  '],[' ', 'Importe Total IVA% incluido', this.dataConcepts[1].importIVA+'€', '  ']]
+      foot:[[' ', 'Importe Total', this.dataConcepts[1].import+'€', '  '],[' ', 'Importe Total IVA%', this.dataConcepts[1].importIVA+'€', '  ']]
     });
     doc.addImage(img,  'JPEG', 20, 0, 50, 50);
     doc.save('factura'+this.dataConcepts[1].nameBudget+'.pdf');

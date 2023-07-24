@@ -28,6 +28,7 @@
           <tr>
             <th style="width: 25%" class="text-center" scope="col">Concepto</th>
             <th></th>
+            <th style="width: 25%" class="text-center" scope="col">Unidades</th>
             <th></th>
             <th style="width: 25%" class="text-center" scope="col">Valor</th>
           </tr>
@@ -36,6 +37,7 @@
           <tr scope="row" *ngFor="let dc of dataConcepts[0]">
             <td class="col-md-1 text-center">{{ dc.nameField }}</td>
             <td></td>
+            <td class="col-md-1 text-center">{{ dc.units }}</td>
             <td></td>
             <td class="col-md-1 text-center">{{ dc.value }}€</td>
           </tr>

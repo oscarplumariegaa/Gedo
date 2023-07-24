@@ -179,6 +179,10 @@ export class AddItemComponent {
   addFieldValue() {
     let importBudget = parseInt(this.addBudgetForm.controls['Import'].value);
 
+    if(this.newConcept.units > 0){
+      this.newConcept.value = this.newConcept.value * this.newConcept.units;
+    }
+
     if (this.data.budget) {
       this.newConcept['idBudget'] = this.data.budget.idBudget;
     }
@@ -235,7 +239,6 @@ export class AddItemComponent {
           this.service.editConcepts(this.data.budget.idBudget, newConcepts).subscribe(data => { })
         }
       } else {
-        console.log(this.lastBudgetId);
           for (let i = 0; i < newConcepts.length; i++) {
             newConcepts[i].idBudget = this.lastBudgetId;
           }

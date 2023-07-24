@@ -59,6 +59,10 @@ export class ApiService {
       const body = JSON.stringify(arrConcepts);
       return this.http.post<any>(this.API_URL + 'Concepts', body, { 'headers': headers });
     }
+    postLogo(vls:any){
+      let data = vls;
+      return this.http.post<any>('https://api.cloudinary.com/v1_1/dwalmtf3j/image/upload',data);
+    }
     editConcepts(idBudget:number, arrConcepts: any){
       const headers = { 'content-type': 'application/json' }
       const body = JSON.stringify(arrConcepts);

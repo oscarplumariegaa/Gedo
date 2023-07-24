@@ -39,10 +39,7 @@ export class MyaccountComponent {
     })
 
   }
-
-  onFileSelected(event:any){
-    this.userForm.controls['Logo'].setValue(event.target.files[0].name);
-  }
+  
   editUser(){
     this.service.editUser(this.user.idUser, this.userForm.value).subscribe(data => {
     })
