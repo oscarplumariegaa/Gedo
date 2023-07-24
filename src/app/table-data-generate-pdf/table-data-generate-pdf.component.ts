@@ -51,7 +51,13 @@ export class TableDataGeneratePdfComponent {
 
   generatePDF() {
     const doc = new jsPDF();
+    let img = new Image();
+    img.src = 'https://res.cloudinary.com/dwalmtf3j/image/upload/v1690204726/logos/logo_fmffoo.png';
     autoTable(doc, {
+      styles: {
+        fontSize: 12
+      },
+      startY: 50,
       head: [
         [{ content: 'Factura #' + this.dataConcepts[1].nameBudget, colSpan: 3, styles: { halign: 'center', fillColor: [22, 160, 133] } }
         ],
@@ -74,6 +80,7 @@ export class TableDataGeneratePdfComponent {
       body: this.generateBodyConcepts(),
       foot:[[' ', 'Importe Total', this.dataConcepts[1].import+'€', '  '],[' ', 'Importe Total IVA% incluido', this.dataConcepts[1].importIVA+'€', '  ']]
     });
+    doc.addImage(img,  'JPEG', 20, 0, 50, 50);
     doc.save('factura'+this.dataConcepts[1].nameBudget+'.pdf');
   }
 }

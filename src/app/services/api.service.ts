@@ -39,6 +39,11 @@ export class ApiService {
       const body = JSON.stringify(arrClient);
       return this.http.post<any>(this.API_URL + 'Clients', body, { 'headers': headers });
     }
+    editUser(id: number, arrUser:any){
+      const headers = { 'content-type': 'application/json' }
+      const body = JSON.stringify(arrUser);
+      return this.http.put<any>(this.API_URL + 'Users/' + id, body, { 'headers': headers });
+    }
     postBill(arrBill:any){
       const headers = { 'content-type': 'application/json' }
       const body = JSON.stringify(arrBill);
