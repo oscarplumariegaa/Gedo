@@ -7,6 +7,18 @@
       <th mat-header-cell *matHeaderCellDef> Cliente </th>
       <td mat-cell *matCellDef="let bill"> {{bill.nameClient}} </td>
     </ng-container>
+    <ng-container matColumnDef="Import">
+      <th mat-header-cell *matHeaderCellDef> Importe </th>
+      <td mat-cell *matCellDef="let bill"> {{bill.import}} </td>
+    </ng-container>
+    <ng-container matColumnDef="ImportIVA">
+      <th mat-header-cell *matHeaderCellDef> Importe IVA% incluido </th>
+      <td mat-cell *matCellDef="let bill"> {{bill.importIVA}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Date">
+      <th mat-header-cell *matHeaderCellDef> Fecha </th>
+      <td mat-cell *matCellDef="let bill"> {{bill.date}} </td>
+    </ng-container>
     <ng-container matColumnDef="Actions">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Acciones </th>
       <td mat-cell *matCellDef="let bill">

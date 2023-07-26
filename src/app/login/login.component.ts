@@ -13,6 +13,7 @@ export class LoginComponent {
   loginUserForm!: FormGroup;
   hide = true;
   isLogging: boolean = false;
+  modalOpen: string = 'login';
 
   username: string = "";
   password: string = "";
@@ -67,5 +68,9 @@ export class LoginComponent {
       this.show = !this.show;
       this.loginmessage = 'Credenciales no válidas';
     })
+  }
+
+  goTo(action: string){
+    this.modalOpen = action;
   }
 }

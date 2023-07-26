@@ -22,6 +22,8 @@ import { MatListModule } from '@angular/material/list';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatCardModule} from '@angular/material/card';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MomentDateModule } from '@angular/material-moment-adapter';
 
 
 import { DeleteItemComponent } from './delete-item/delete-item.component';
@@ -69,7 +71,9 @@ import { MainPanelComponent } from './main-panel/main-panel.component';
     MatToolbarModule,
     MatNativeDateModule,
     MatRadioModule,
-    MatGridListModule
+    MatGridListModule,
+    MatDatepickerModule,
+    MomentDateModule
   ],
   providers: [],
   bootstrap: [AppComponent]

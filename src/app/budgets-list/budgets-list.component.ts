@@ -10,7 +10,7 @@ import { AddItemComponent } from '../add-item/add-item.component';
   styleUrls: ['./budgets-list.component.css']
 })
 export class BudgetsListComponent {
-  displayedColumns: string[] = ['NameBudget', 'Client', 'Import', 'ImportIVA', 'Actions'];
+  displayedColumns: string[] = ['NameBudget', 'Client', 'Import', 'ImportIVA', 'Date', 'Actions'];
   dataSource: any = [];
   idUser: any;
 

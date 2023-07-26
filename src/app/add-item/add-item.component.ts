@@ -3,11 +3,29 @@ import { ApiService } from '../services/api.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MomentDateModule, MomentDateAdapter } from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'LL'
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'YYYY'
+  }
+};
 
 @Component({
   selector: 'app-add-item',
   templateUrl: './add-item.component.html',
-  styleUrls: ['./add-item.component.css']
+  styleUrls: ['./add-item.component.css'],
+  providers: [
+    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }
+  ]
 })
 export class AddItemComponent {
   constructor(
@@ -32,6 +50,7 @@ export class AddItemComponent {
   public notEdit: boolean = true;
   idUser: any;
   year: any;
+  dateP!: string;
 
   ngOnInit() {
     this.year =  new Date().getFullYear().toString().substring(2,4);
@@ -55,7 +74,8 @@ export class AddItemComponent {
       Import: '',
       ImportIVA: '',
       IdBill: '',
-      IVA: 0
+      IVA: 0,
+      Date: ''
     })
     this.addClientForm = this.fb.group({
       NameClient: '',
@@ -90,7 +110,8 @@ export class AddItemComponent {
         Import: this.data.budget.import ? this.data.budget.import : '',
         ImportIVA: this.data.budget.importIVA ? this.data.budget.importIVA : '',
         IdBill: this.data.budget.idBill ? this.data.budget.idBill : '',
-        IVA: this.data.budget.iva ? this.data.budget.iva : ''
+        IVA: this.data.budget.iva ? this.data.budget.iva : '',
+        Date: this.data.budget.date ? this.data.budget.date : '',
       })
     }
     this.service.getClientsByUser(this.idUser).subscribe(clients => {
@@ -108,6 +129,24 @@ export class AddItemComponent {
     for (const i in group.controls) {
       group.controls[i].markAsDirty();
     }
+  }
+
+  dateChange(event: any) {
+    var month;
+    var day;
+    if (event.month < 9) {
+      month = event.month + 1;
+      month = ('0' + month).slice(-2);
+    } else {
+      month = event.month + 1;
+    }
+    if (event.date < 10) {
+      day = ('0' + event.date);
+    } else {
+      day = event.date;
+    }
+
+    this.dateP = `${day}/${month}/${event.year}`;
   }
 
   padNumber(num: any) {
@@ -161,6 +200,7 @@ export class AddItemComponent {
       this.addBudgetForm.removeControl('IdBill');
       this.addBudgetForm.controls['IdBudget'].setValue(this.lastBudgetId);
       this.addBudgetForm.controls['IVA'].setValue(parseInt(this.addBudgetForm.controls['IVA'].value));
+      this.addBudgetForm.controls['Date'].setValue(this.dateP);
 
       this.service.postBudget(this.addBudgetForm.value).subscribe(data => {
         this.conceptsFunction('budget', this.fieldArray, 0);

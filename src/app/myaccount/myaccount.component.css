@@ -1,0 +1,12 @@
+.example-card {
+  max-width: 900px;
+  margin: 0 auto;
+  border: none;
+  margin-top: 3%;
+}
+.example-card img {
+  margin: 0 auto;
+}
+form mat-form-field {
+  width: 100%;
+}

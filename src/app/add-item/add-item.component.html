@@ -78,6 +78,23 @@
           <mat-label>Importe IVA</mat-label>
           <input readonly="true" formControlName="ImportIVA" matInput placeholder="Importe IVA" />
         </mat-form-field>
+        <mat-form-field>
+          <mat-label>Fecha</mat-label>
+          <input
+            matInput
+            formControlName="Date"
+            (dateChange)="dateChange($event.value._i)"
+            [matDatepicker]="dateBudget"
+            placeholder="Fecha"
+            required
+          />
+          <!--<mat-hint>DD/MM/AAAA</mat-hint>-->
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="dateBudget"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #dateBudget></mat-datepicker>
+        </mat-form-field>
       </p>
       <table class="table table-striped table-bordered">
         <tbody>
