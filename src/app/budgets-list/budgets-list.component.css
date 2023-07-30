@@ -2,6 +2,11 @@ table {
   width: 100%;
 }
 
+button{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 .mat-column-NameBudget {
   word-wrap: break-word !important;
   white-space: unset !important;
