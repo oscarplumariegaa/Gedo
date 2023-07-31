@@ -51,6 +51,7 @@ export class AddItemComponent {
   idUser: any;
   year: any;
   dateP!: string;
+  clientEmail!: string;
 
   ngOnInit() {
     this.year =  new Date().getFullYear().toString().substring(2,4);
@@ -99,6 +100,9 @@ export class AddItemComponent {
       if (this.data.budget.idBill > 0) {
         this.notEdit = false;
       }
+      this.service.getClientById(this.data.budget.idClient).subscribe((data:any) => {
+        this.clientEmail = data.email;
+      })
       this.service.getBudgetConcepts(this.data.budget.idBudget).subscribe(data => {
         this.conceptData = data;
       })
