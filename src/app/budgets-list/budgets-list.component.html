@@ -24,8 +24,9 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Acciones </th>
       <td mat-cell *matCellDef="let budget">
         <button mat-raised-button (click)="openDialog(0,budget, 0, '')" color="buttonGreyColor">Detalles</button>
-        <button *ngIf="!budget.idBill" mat-raised-button (click)="openDialog(3,budget, 0, '')" color="buttonGreyColor"><mat-icon>event_available</mat-icon></button>
-        <button *ngIf="budget.idBill" mat-raised-button (click)="generatePDF(budget)" color="buttonGreyColor"><mat-icon>cloud_download</mat-icon></button>
+        <button mat-icon-button (click)="openDialog(4,budget, 0, '')" color="primary"><mat-icon>alternate_email</mat-icon></button>
+        <button *ngIf="!budget.idBill" mat-icon-button (click)="openDialog(3,budget, 0, '')"><mat-icon>event_available</mat-icon></button>
+        <button *ngIf="budget.idBill" mat-icon-button (click)="generatePDF(budget)"><mat-icon>cloud_download</mat-icon></button>
         <button mat-raised-button (click)="openDialog(1,'',budget.idBudget, budget.nameBudget)" color="buttonGreyColor">Eliminar</button>
       </td>
     </ng-container>

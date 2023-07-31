@@ -56,10 +56,18 @@ export class BudgetsListComponent {
           }
         });
         break;
+      case 4:
+        this.dialog.open(AddItemComponent, {
+          width: '1340px', disableClose: true, data: {
+            action: 'sendEmail',
+            budget: data
+          }
+        });
+        break;
     }
   }
 
-  generatePDF(budget:any){
+  generatePDF(budget: any) {
 
   }
 }

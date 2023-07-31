@@ -46,7 +46,21 @@
     </div>
   </mat-dialog-content>
 </div>
-<div *ngIf="(data.action !== 'createBill' && data.action !== 'client')">
+
+<div *ngIf="data.action === 'sendEmail'">
+  <div mat-dialog-title>Enviar Email</div>
+  <mat-dialog-content>
+    <p>
+      <mat-label>¿Desea enviar un email al cliente con el presupuesto?</mat-label>
+    </p>
+    <div class="btn-sec">
+      <button mat-raised-button type="submit" color="primary" class="Update-btn" (click)="onAddCus()">Enviar</button>
+      <button mat-raised-button type="button" class="Discard-btn" (click)="openDialog()">Cancelar</button>
+    </div>
+  </mat-dialog-content>
+</div>
+
+<div *ngIf="(data.action !== 'createBill' && data.action !== 'client' && data.action !== 'sendEmail')">
   <form [formGroup]="addBudgetForm" class="dialog-form">
     <div *ngIf="data.action === 'budget'" mat-dialog-title>Añadir Presupuesto</div>
     <div *ngIf="data.action === 'edit-budget'" mat-dialog-title>Editar Presupuesto</div>
