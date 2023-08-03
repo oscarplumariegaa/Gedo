@@ -19,6 +19,9 @@ export class ApiService {
       }),
     };
 
+    sendEmail(to:string, subject:string, from:string){
+      return this.http.get(this.API_URL + 'Budgets/mail/' + to + '/' + subject + '/' + from);
+    }
     getClients() {
       return this.http.get(this.API_URL + 'Clients');
     }

@@ -49,6 +49,7 @@ export class AddItemComponent {
   public nextNameBudget!: string;
   public notEdit: boolean = true;
   idUser: any;
+  emailUser: any;
   year: any;
   dateP!: string;
   clientEmail!: string;
@@ -56,6 +57,7 @@ export class AddItemComponent {
   ngOnInit() {
     this.year =  new Date().getFullYear().toString().substring(2,4);
     this.idUser = localStorage.getItem('idUser');
+    this.emailUser = localStorage.getItem('emailUser');
     this.newConcept, this.fieldArray = [];
 
     this.service.lastIdBudgetByUser(this.idUser).subscribe((data: any) => {
@@ -178,6 +180,11 @@ export class AddItemComponent {
     } else {
       this.dialog.closeAll();
     }
+  }
+  sendEmail(){
+    this.service.sendEmail("oscarplumariegacxm@gmail.com", "subject", this.emailUser).subscribe((data) => {
+
+    })
   }
   onAddCus() {
     if (this.data.action === 'createBill') {
