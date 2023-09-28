@@ -8,14 +8,14 @@ button{
 }
 
 .mat-column-NameBudget {
-  word-wrap: break-word !important;
+  /*word-wrap: break-word !important;*/
   white-space: unset !important;
   flex: 0 0 28% !important;
   width: 15% !important;
-  overflow-wrap: break-word;
+  /*overflow-wrap: break-word;
   word-wrap: break-word;
 
-  word-break: break-word;
+  word-break: break-word;*/
 
   -ms-hyphens: auto;
   -moz-hyphens: auto;
@@ -24,14 +24,14 @@ button{
 }
 
 .mat-column-Client {
-  word-wrap: break-word !important;
+  /*word-wrap: break-word !important;*/
   white-space: unset !important;
   flex: 0 0 25% !important;
   width: 22% !important;
-  overflow-wrap: break-word;
+  /*overflow-wrap: break-word;
   word-wrap: break-word;
 
-  word-break: break-word;
+  word-break: break-word;*/
 
   -ms-hyphens: auto;
   -moz-hyphens: auto;
@@ -40,14 +40,14 @@ button{
 }
 
 .mat-column-Import {
-  word-wrap: break-word !important;
+  /*word-wrap: break-word !important;*/
   white-space: unset !important;
   flex: 0 0 17% !important;
   width: 12% !important;
-  overflow-wrap: break-word;
+  /*overflow-wrap: break-word;
   word-wrap: break-word;
 
-  word-break: break-word;
+  word-break: break-word;*/
 
   -ms-hyphens: auto;
   -moz-hyphens: auto;
@@ -55,14 +55,14 @@ button{
   hyphens: auto;
 }
 .mat-column-ImportIVA {
-  word-wrap: break-word !important;
+  /*word-wrap: break-word !important;*/
   white-space: unset !important;
   flex: 0 0 17% !important;
   width: 12% !important;
-  overflow-wrap: break-word;
+  /*overflow-wrap: break-word;
   word-wrap: break-word;
 
-  word-break: break-word;
+  word-break: break-word;*/
 
   -ms-hyphens: auto;
   -moz-hyphens: auto;
@@ -70,14 +70,14 @@ button{
   hyphens: auto;
 }
 .mat-column-Date {
-  word-wrap: break-word !important;
+  /*word-wrap: break-word !important;*/
   white-space: unset !important;
   flex: 0 0 17% !important;
   width: 12% !important;
-  overflow-wrap: break-word;
+  /*overflow-wrap: break-word;
   word-wrap: break-word;
 
-  word-break: break-word;
+  word-break: break-word;*/
 
   -ms-hyphens: auto;
   -moz-hyphens: auto;
@@ -85,14 +85,14 @@ button{
   hyphens: auto;
 }
 .mat-column-Actions {
-  word-wrap: break-word !important;
+  /*word-wrap: break-word !important;*/
   white-space: unset !important;
   flex: 0 0 17% !important;
   width: 17% !important;
-  overflow-wrap: break-word;
+  /*overflow-wrap: break-word;
   word-wrap: break-word;
 
-  word-break: break-word;
+  word-break: break-word;*/
 
   -ms-hyphens: auto;
   -moz-hyphens: auto;

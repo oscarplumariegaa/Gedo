@@ -5,6 +5,7 @@ import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MomentDateModule, MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { TableDataGeneratePdfComponent } from '../table-data-generate-pdf/table-data-generate-pdf.component';
 
 export const MY_FORMATS = {
   parse: {
@@ -182,9 +183,15 @@ export class AddItemComponent {
     }
   }
   sendEmail(){
-    this.service.sendEmail("oscarplumariegacxm@gmail.com", "subject", this.emailUser).subscribe((data) => {
+    this.dialog.open(TableDataGeneratePdfComponent, {
+      width: '1340px', disableClose: true, data: {
+        action: 'bill',
+        bill: this.data.budget
+      }
+    });
+    /*this.service.sendEmail("oscarplumariegacxm@gmail.com", "subject", this.emailUser).subscribe((data) => {
 
-    })
+    })*/
   }
   onAddCus() {
     if (this.data.action === 'createBill') {

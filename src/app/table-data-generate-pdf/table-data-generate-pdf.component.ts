@@ -23,6 +23,7 @@ export class TableDataGeneratePdfComponent {
 
   dataConcepts: any;
   idUser: any;
+  sendButton: boolean = false;
 
   ngOnInit() {
     this.idUser = localStorage.getItem('idUser');
@@ -49,7 +50,11 @@ export class TableDataGeneratePdfComponent {
     return arr;
   }
 
-  generatePDF() {
+  generatePDF(action: string) {
+    let typeFile = 'Factura #';
+    if(action === 'sendEmail'){
+      typeFile = 'Presupuesto #';
+    };
     const doc = new jsPDF();
     let img = new Image();
     img.src = this.dataConcepts[3].logo;
@@ -59,7 +64,7 @@ export class TableDataGeneratePdfComponent {
       },
       startY: 55,
       head: [
-        [{ content: 'Factura #' + this.dataConcepts[1].nameBudget, colSpan: 3, styles: { halign: 'center', fillColor: [22, 160, 133] } }
+        [{ content: typeFile + this.dataConcepts[1].nameBudget, colSpan: 3, styles: { halign: 'center', fillColor: [22, 160, 133] } }
         ],
         [{ content: 'Cliente ' + this.dataConcepts[2].nameClient, styles: { halign: 'left', fillColor: [20, 90, 110] } },
         { content: ' ', styles: { halign: 'left', fillColor: [20, 120, 110] } },
@@ -81,6 +86,14 @@ export class TableDataGeneratePdfComponent {
       foot:[[' ', 'Importe Total', this.dataConcepts[1].import+'€', '  '],[' ', 'Importe Total IVA%', this.dataConcepts[1].importIVA+'€', '  ']]
     });
     doc.addImage(img,  'JPEG', 20, 0, 50, 50);
-    doc.save('factura'+this.dataConcepts[1].nameBudget+'.pdf');
+
+    if(action === 'sendEmail'){
+      //doc.save('presupuesto'+this.dataConcepts[1].nameBudget+'.pdf');
+      let binary = doc.output();
+      this.service.sendEmail(this.dataConcepts[2].email, "subject", this.dataConcepts[2].email, binary).subscribe((data) => {
+      })
+    }else{
+      doc.save('factura'+this.dataConcepts[1].nameBudget+'.pdf');
+    }
   }
 }

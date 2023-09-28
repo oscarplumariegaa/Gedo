@@ -1,11 +1,14 @@
-<div class="header">
-    <a href="#default" class="logo">Gedo</a>
-    <div class="header-right">
-      <a routerLink="home">Inicio</a>
-      <a>Contabilidad</a>
-      <a *ngIf="!isLogging" routerLink="login">Iniciar Sesion</a>
-      <a *ngIf="isLogging" routerLink="myaccount">Mi Cuenta</a>
-      <a *ngIf="isLogging" (click)="closeLogin()">Cerrar Sesión</a>
-    </div>
-  </div>
-  <router-outlet></router-outlet>
+<header class="site-header">
+  <div class="site-identity">
+    <a href="#"><img src="https://cdn.cookielaw.org/logos/9e3840d9-d3d2-4665-ac3b-b1cdce104745/49c09d4c-486b-4e8a-a203-8c535cca4d08/455d76e3-d80f-4d16-b105-2cd896eb1784/GPC-RGB-PRIMARY_4C-White_BG.png" alt="Site Name" /></a>
+  </div>  
+  <nav class="site-navigation">
+    <ul class="nav">
+      <li><a routerLink="home">Inicio</a></li>
+      <li><a *ngIf="!isLogging" routerLink="login">Iniciar Sesion</a></li> 
+      <li><a *ngIf="isLogging" routerLink="myaccount">Mi Cuenta</a></li> 
+      <li><a *ngIf="isLogging" (click)="closeLogin()">Cerrar Sesión</a></li> 
+    </ul>
+  </nav>
+</header>
+<router-outlet></router-outlet>

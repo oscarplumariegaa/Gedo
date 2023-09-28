@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
@@ -19,8 +19,17 @@ export class ApiService {
       }),
     };
 
-    sendEmail(to:string, subject:string, from:string){
-      return this.http.get(this.API_URL + 'Budgets/mail/' + to + '/' + subject + '/' + from);
+    sendEmail(to:string, subject:string, from:string, file:string){
+      const headers = { 'Content-Type': 'multipart/form-data; boundary=--14737809831466499882746641449' }
+      const formData = new FormData();
+      formData.append('filename', file);
+
+      const params = new HttpParams();
+      params.append('to', to);
+      params.append('subject', subject);
+      params.append('from', from);
+
+      return this.http.post(this.API_URL + 'Budgets/Send_Email?to='+to+'&subject='+subject+'&from='+from, formData, { headers: headers, params: params });
     }
     getClients() {
       return this.http.get(this.API_URL + 'Clients');

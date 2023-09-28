@@ -55,7 +55,8 @@
         <div>
             <tr>
                 <th>
-                    <button mat-raised-button (click)="generatePDF()" color="primary">Generar PDF</button>
+                    <button mat-raised-button (click)="generatePDF('generate')" color="primary">Generar PDF</button>
+                    <button mat-raised-button (click)="generatePDF('sendEmail')" color="primary">Enviar email</button>
                     <button mat-raised-button style="margin-left: 5px;" (click)="openDialog()" color="warn">Cerrar</button>
                 </th>
               </tr>
